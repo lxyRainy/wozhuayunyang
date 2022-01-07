@@ -1,0 +1,55 @@
+/*覆盖标签固定样式开始*/
+* {
+    margin: 0;
+    padding: 0;
+    /*outline: solid 1px #666666;*/
+}
+div{box-sizing: border-box}
+body {
+    background-color: rgba(244, 244, 244, 1);
+}
+button {
+    border: none;
+    outline: none;
+}
+ul, li,ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    outline:none;
+}
+input {
+    border: none;
+    outline: none;
+}
+b{font-weight: normal}
+input,select,textarea,button {vertical-align:middle}
+table{border-collapse:collapse;border-spacing:0;width:100%;}
+img,object{width:auto;max-width:100%;/*height:auto;*/width:auto\9;/* for ie8 */-ms-interpolation-mode: bicubic;}
+/* header开始 */
+.arrow_header{
+    font-size: 4.5vw;
+    height: 13.9vw;
+    line-height: 13.9vw;
+    color: #333333;
+    text-align: center;
+    font-weight: 500;
+    background: #FFFFFF;
+    position: relative;
+    letter-spacing: 2px;
+}
+.arrow_header a{
+    position: absolute;
+    width: 6vw;
+    left: 3vw;
+    top: 5vw;
+    background: url(../images/common/left_arrow.svg) center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 6vw;
+}
+/* header结束 */
+
