@@ -4,7 +4,7 @@
     padding: 0;
     /*outline: solid 1px #666666;*/
 }
-div{box-sizing: border-box}
+div,input{box-sizing: border-box}
 body {
     background-color: rgba(244, 244, 244, 1);
 }
