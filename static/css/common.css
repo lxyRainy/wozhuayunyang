@@ -1,3 +1,6 @@
+:root{
+    --light-green-color:#6FB1A5;
+  }
 /*覆盖标签固定样式开始*/
 * {
     margin: 0;
@@ -38,8 +41,9 @@ img,object{width:auto;max-width:100%;/*height:auto;*/width:auto\9;/* for ie8 */-
     text-align: center;
     font-weight: 500;
     background: #FFFFFF;
-    position: relative;
+    position: fixed;
     letter-spacing: 2px;
+    width: 100%;
 }
 .arrow_header a{
     position: absolute;
