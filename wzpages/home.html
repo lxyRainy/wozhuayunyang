@@ -4,10 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="../static/css/common.css" />
-    <link
-      rel="stylesheet"
-      href="../static/components/talentModal/talentModal.css"
-    />
+    <link rel="stylesheet" href="../static/components/weui/jquery-weui.css" />
+    <link rel="stylesheet" href="../static/components/weui/weui.css" />
     <link rel="stylesheet" href="../static/css/home.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>云养区</title>
@@ -29,8 +27,8 @@
           onclick="chaClick()"
         />
       </div>
-      <div class="home_content">
-        <div class="content_item" onclick="openXyxq()">
+      <div class="home_content" id="home_content">
+        <!-- <div class="content_item" onclick="openXyxq()">
           <img src="../static/images/home/cat.png" alt="" />
           <p>哈比的猫小院</p>
           <div class="content_msg"><b>$9.8</b><span>剩余:1</span></div>
@@ -44,7 +42,7 @@
           <img src="../static/images/home/cat.png" alt="" />
           <p>哈比的猫小院</p>
           <div class="content_msg"><b>$9.8</b><span>剩余:1</span></div>
-        </div>
+        </div> -->
       </div>
     </section>
     <script type="text/javascript" src="../static/js/common/md5.js"></script>
@@ -52,9 +50,14 @@
       type="text/javascript"
       src="../static/js/common/jquery-3.4.1.min.js"
     ></script>
+
     <script
       type="text/javascript"
-      src="../static/components/talentModal/talentModal.js"
+      src="../static/components/weui/jquery-weui.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../static/components/weui/weui.min.js"
     ></script>
     <script type="text/javascript" src="../static/js/common/common.js"></script>
     <script type="text/javascript" src="../static/js/home.js"></script>
