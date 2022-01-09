@@ -15,6 +15,7 @@
 .xiaoyuan_top_item{
     background: var(--light-green-color);
     padding: 4vw;
+    font-size: 4vw;
 }
 .xiaoyuan_price{
     display: flex;
@@ -22,7 +23,7 @@
 }
 .xiaoyuan_price span{
     /* width: 40vw; */
-    padding: 1vw 2vw;
+    padding: 0.5vw 2vw;
     height: 6vw;
     line-height: 6vw;
     background-color: #ffffff;
@@ -35,8 +36,63 @@
 .xiaoyuan_name{
     display: flex;
     justify-content: space-between;
+    margin-top: 1.5vw;
+}
+.xiaoyuan_name p{
+    width: 60%;
 }
 .name_right b{
     color: orange;
+    margin-left: 2vw;
 }
 /* 上半部分结束 */
+/* 中间部分开始 */
+.card{
+    background: #ffffff;
+    padding: 4vw;
+    margin: 2vw 0;
+    font-size: 3.3vw;
+}
+.org_tree{
+    display: flex;
+    color: var(--light-green-color);
+    margin-top: 5vw;
+}
+.org_tree>img{
+    width: 20vw;
+    height: 20vw;
+    margin-right: 1vw;
+}
+#org_msg>p{
+ font-weight: 600;
+ letter-spacing: 1px;
+}
+#org_msg>div{
+    display: flex;
+    /* align-items: flex-start; */
+}
+#org_msg>div::before{
+    content: url(../images/xiaoyuanxq/location.svg);
+    display: inline-block;
+    margin-top: 2px;
+    margin-right: 2vw;
+}
+.org_address{
+    color: var(--light-green-color);
+}
+#jgName::before{
+    content: url(../images/xiaoyuanxq/mechanism.svg) !important;
+}
+.org_words{
+    background: #ebf5f4;
+    color: var(--light-green-color);
+    font-size: 3.3vw;
+    margin: 3vw 0;
+    padding: 1vw;
+}
+.org_title{
+    text-align: center;
+    font-size: 4vw;
+    border-radius: 5px;
+}
+/* 中间部分结束 */

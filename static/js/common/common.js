@@ -30,7 +30,13 @@ Date.prototype.format = function (format) {
   }
   return format
 }
-
+/**
+ * 调接口
+ * @param {*} method post/get
+ * @param {*} url 接口路径
+ * @param {*} data 传参
+ * @returns
+ */
 function getApi(method, url, data) {
   return new Promise(function (resolve, reject) {
     let timestamp = new Date().getTime().toString().substr(0, 10)
@@ -75,4 +81,14 @@ function getUrlParam(name) {
     return ""
   }
   return result[1]
+}
+// 将所有空格替换为换行符
+function toBr(string) {
+  //替换所有的换行符
+  string = string.replace(/\r\n/g, "<br>")
+  string = string.replace(/\n/g, "<br>")
+
+  //替换所有的空格（中文空格、英文空格都会被替换）
+  string = string.replace(/\s/g, "&nbsp;")
+  return string
 }
