@@ -38,7 +38,7 @@ function initOrgPage(data) {
   $("#org_tree img").attr("src", category.logo)
   $("#org_tree p").html(category.desc)
   // 机构信息
-  $(".org_address").html(data.address)
+  $(".org_address").html(org.province + " " + org.city + " " + org.area)
   $("#org_intro").html(data.intro)
   // 图片
   let imgs = `<img src="${data.image1}"><img src="${data.image2}"><img src="${data.image3}">`
