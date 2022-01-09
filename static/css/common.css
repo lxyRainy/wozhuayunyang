@@ -13,6 +13,7 @@ div,input{box-sizing: border-box}
 body {
     background-color: var(--gray-color);
     font-family: SimHei,"微软雅黑",sans-serif;
+    font-size: 3.3vw;
 }
 button {
     border: none;
@@ -35,6 +36,12 @@ b{font-weight: normal}
 input,select,textarea,button {vertical-align:middle}
 table{border-collapse:collapse;border-spacing:0;width:100%;}
 img,object{width:auto;max-width:100%;/*height:auto;*/width:auto\9;/* for ie8 */-ms-interpolation-mode: bicubic;}
+.no_data{
+    width: 100vw;
+    height: 100vw;
+    line-height: 100vw;
+    text-align: center;
+}
 /* header开始 */
 .arrow_header{
     font-size: 4.5vw;

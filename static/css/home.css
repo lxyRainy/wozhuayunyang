@@ -51,6 +51,7 @@
 .content_item>p{
     text-align: left;
     min-height: 14vw;
+    margin-top: 2vw;
 }
 .content_msg{
     display: inline-flex;

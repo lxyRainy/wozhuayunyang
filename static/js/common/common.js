@@ -38,6 +38,7 @@ Date.prototype.format = function (format) {
  * @returns
  */
 function getApi(method, url, data) {
+  console.log("data===", data)
   return new Promise(function (resolve, reject) {
     let timestamp = new Date().getTime().toString().substr(0, 10)
     // let url = "/ca-caring-organization/list"
