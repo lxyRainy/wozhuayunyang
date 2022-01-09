@@ -19,6 +19,7 @@ function getHomeCx() {
   } else {
     let myinput = $(".home_top input").val()
     if (myinput) {
+      $(".home_top img").show()
       getOrgsByInput(myinput)
     } else {
       showOrgs(allOrg)
@@ -41,14 +42,16 @@ function showOrgs(data) {
   })
 }
 // 输入框change事件
-function xyncChange(v) {
+function xyncChange() {
   // console.log("v", $(v).val())
-  if ($(v).val() !== "") {
+  let myinput = $(".home_top input").val()
+  if (!myinput) {
+    $(".home_top img").hide()
+    showOrgs(allOrg)
+  } else {
     $(".home_top img").show()
     // 模糊搜索
-    getOrgsByInput($(v).val())
-  } else {
-    $(".home_top img").hide()
+    getOrgsByInput(myinput)
   }
 }
 // 模糊搜索

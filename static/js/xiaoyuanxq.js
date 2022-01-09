@@ -12,6 +12,9 @@ function getOrgInfo(id) {
     let data = res.data
     initOrgPage(data)
     console.log(res)
+    $("#openPets").click(function () {
+      window.location.href = "pets_list.html?id=" + id
+    })
   })
 }
 // 返显页面
