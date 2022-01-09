@@ -1,6 +1,7 @@
 :root{
     --light-green-color:#6FB1A5;
     --gray-color:rgba(244, 244, 244, 1);
+    --orange-color:#ed6900;
   }
 /*覆盖标签固定样式开始*/
 * {

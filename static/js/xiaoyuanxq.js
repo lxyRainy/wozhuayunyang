@@ -27,7 +27,7 @@ function initOrgPage(data) {
   // 剩余 数量
   $("#restAnimal").html(data.pet_num)
   // 价格
-  $("#animalPrice").html("￥" + fmPrice(data.first_price / 100))
+  $(".pet_price").html("￥" + fmPrice(data.first_price / 100))
   const category = data.category
   let string = category.content
   string = toBr(string)

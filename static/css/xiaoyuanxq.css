@@ -45,7 +45,7 @@
     width: 52%;
 }
 .name_right b{
-    color: orange;
+    color: #C9CB9D;
     margin-left: 2vw;
 }
 /* 上半部分结束 */
@@ -99,3 +99,30 @@
     border-radius: 5px;
 }
 /* 中间部分结束 */
+footer{
+    background: var(--gray-color);
+    position: fixed;
+    bottom: 0;
+    padding-top: 4vw;
+    width: 100%;
+}
+.pay_block{
+    display: inline-flex;
+    justify-content: space-between;
+    border-top: var(--light-green-color) solid 1px;
+    width: 100%;
+    color: var(--light-green-color);
+    font-size: 4.5vw;
+    padding-left: 4vw;
+    padding-bottom: 2vw;
+    line-height: 10vw;
+}
+.pay_block button{
+    background: var(--light-green-color);
+    width: 25vw;
+    height: 10vw;
+    font-size: 4vw;
+    /* line-height: 10vw; */
+    color: #ffffff;
+   
+}
