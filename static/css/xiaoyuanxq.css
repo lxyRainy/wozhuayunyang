@@ -12,6 +12,9 @@
     align-items: center;
     justify-content: center;
 }
+.xiaoyuan_gift>img{
+    height: 100%;
+}
 .xiaoyuan_top_item{
     background: var(--light-green-color);
     padding: 4vw;
@@ -39,7 +42,7 @@
     margin-top: 1.5vw;
 }
 .xiaoyuan_name p{
-    width: 60%;
+    width: 52%;
 }
 .name_right b{
     color: orange;

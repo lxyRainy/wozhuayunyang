@@ -1,14 +1,20 @@
 .main_content{
     padding-bottom: 2vw;
-    padding-top: 15.5vw;
+    padding-top: 13.5vw;
+}
+.home_top_block{
+    padding:  2vw;
+    background: var(--gray-color);
+    position: fixed;
+    width: 100%;
 }
 .home_top{
     width: 100%;
     background: #ffffff;
-    border-radius: 2px;
+    border-radius: 5px;
     height: 8vw;
     line-height: 8vw;
-    margin-bottom: 2vw;
+    /* margin-bottom: 2vw; */
     position: relative;
 }
 .home_top input{
@@ -16,6 +22,7 @@
     height: 100%;
     padding-left: 2vw;
     font-size: 3.5vw;
+    border-radius: 5px;
 }
 .home_top img{
     content:url(../images/home/close_pic.svg);
@@ -31,6 +38,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 0 2vw;
+    margin-top: 12vw;
 }
 .content_item{
     width: 47vw;

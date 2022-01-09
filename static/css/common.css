@@ -1,5 +1,6 @@
 :root{
     --light-green-color:#6FB1A5;
+    --gray-color:rgba(244, 244, 244, 1);
   }
 /*覆盖标签固定样式开始*/
 * {
@@ -9,7 +10,8 @@
 }
 div,input{box-sizing: border-box}
 body {
-    background-color: rgba(244, 244, 244, 1);
+    background-color: var(--gray-color);
+    font-family: SimHei,"微软雅黑",sans-serif;
 }
 button {
     border: none;
@@ -42,7 +44,7 @@ img,object{width:auto;max-width:100%;/*height:auto;*/width:auto\9;/* for ie8 */-
     font-weight: 500;
     background: #FFFFFF;
     position: fixed;
-    letter-spacing: 2px;
+    /* letter-spacing: 2px; */
     width: 100%;
 }
 .arrow_header a{
