@@ -54,6 +54,7 @@ img,object{width:auto;max-width:100%;/*height:auto;*/width:auto\9;/* for ie8 */-
     position: fixed;
     /* letter-spacing: 2px; */
     width: 100%;
+    z-index: 100;
 }
 .arrow_header a{
     position: absolute;
@@ -66,4 +67,10 @@ img,object{width:auto;max-width:100%;/*height:auto;*/width:auto\9;/* for ie8 */-
     height: 4.5vw;
 }
 /* header结束 */
+/* weui样式修改 */
+.weui-toast{
+  margin-left: 0;
+}
+/* weui样式结束*/
+
 
