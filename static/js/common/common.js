@@ -1,7 +1,7 @@
 var router = "https://adopt.wozhua.net"
 var key = "8da71946065811ec8e456c92bf623eda"
 // 价格格式化
-function fmPrice (num) {
+function fmPrice(num) {
   return num.toFixed(2)
 }
 // 日期格式化
@@ -30,12 +30,12 @@ Date.prototype.format = function (format) {
   }
   return format
 }
-function formatNumber (n) {
+function formatNumber(n) {
   n = n.toString()
-  return n[1] ? n : '0' + n
+  return n[1] ? n : "0" + n
 }
 // 将时间戳（秒）转换为时间
-function formatTime (time) {
+function formatTime(time) {
   let date = new Date(time * 1000)
   var year = date.getFullYear()
   var month = date.getMonth() + 1
@@ -43,7 +43,16 @@ function formatTime (time) {
   var hour = date.getHours()
   var minute = date.getMinutes()
   var second = date.getSeconds()
-  return year + '年' + formatNumber(month) + '月' + formatNumber(day) + '日' + ' ' + [hour, minute].map(formatNumber).join(':')
+  return (
+    year +
+    "年" +
+    formatNumber(month) +
+    "月" +
+    formatNumber(day) +
+    "日" +
+    " " +
+    [hour, minute].map(formatNumber).join(":")
+  )
 }
 /**
  * 调接口
@@ -52,7 +61,7 @@ function formatTime (time) {
  * @param {*} data 传参
  * @returns
  */
-function getApi (method, url, data) {
+function getApi(method, url, data) {
   console.log("data===", data)
   return new Promise(function (resolve, reject) {
     let timestamp = new Date().getTime().toString().substr(0, 10)
@@ -94,7 +103,7 @@ function getApi (method, url, data) {
   })
 }
 // 获取路径中的参数
-function getUrlParam (name) {
+function getUrlParam(name) {
   var result = window.location.search.match(
     new RegExp("[?&]" + name + "=([^&]+)", "i")
   )
@@ -104,7 +113,7 @@ function getUrlParam (name) {
   return result[1]
 }
 // 将所有空格替换为换行符
-function toBr (string) {
+function toBr(string) {
   //替换所有的换行符
   string = string.replace(/\r\n/g, "<br>")
   string = string.replace(/\n/g, "<br>")
@@ -113,3 +122,30 @@ function toBr (string) {
   string = string.replace(/\s/g, "&nbsp;")
   return string
 }
+function onBridgeReady() {
+  WeixinJSBridge.invoke(
+    "getBrandWCPayRequest",
+    {
+      appId: "wx80b0358d642bed86", //公众号名称，由商户传入
+      timeStamp: "1395712654", //时间戳，自1970年以来的秒数
+      nonceStr: "e61463f8efa94090b1f366cccfbbb444", //随机串
+      package: "prepay_id=u802345jgfjsdfgsdg888",
+      signType: "RSA", //微信签名方式：
+      paySign: "70EA570631E4BB79628FBCA90534C63FF7FADD89", //微信签名
+    },
+    function (res) {
+      if (res.err_msg == "get_brand_wcpay_request:ok") {
+      } // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+    }
+  )
+}
+// if (typeof WeixinJSBridge == "undefined") {
+//   if (document.addEventListener) {
+//     document.addEventListener("WeixinJSBridgeReady", onBridgeReady, false)
+//   } else if (document.attachEvent) {
+//     document.attachEvent("WeixinJSBridgeReady", onBridgeReady)
+//     document.attachEvent("onWeixinJSBridgeReady", onBridgeReady)
+//   }
+// } else {
+//   onBridgeReady()
+// }
