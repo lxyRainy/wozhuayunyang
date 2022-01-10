@@ -4,7 +4,7 @@ $(function () {
   getOrgInfo(id)
 })
 // 获取机构信息
-function getOrgInfo(id) {
+function getOrgInfo (id) {
   let param = {
     org_id: id,
   }
@@ -18,7 +18,7 @@ function getOrgInfo(id) {
   })
 }
 // 返显页面
-function initOrgPage(data) {
+function initOrgPage (data) {
   // 顶部图
   $("#topImg").attr("src", data.top_image)
   // 小院名称
@@ -38,7 +38,7 @@ function initOrgPage(data) {
   $("#org_tree img").attr("src", category.logo)
   $("#org_tree p").html(category.desc)
   // 机构信息
-  $(".org_address").html(org.province + " " + org.city + " " + org.area)
+  $(".org_address").html(data.province + " " + data.city + " " + data.area)
   $("#org_intro").html(data.intro)
   // 图片
   let imgs = `<img src="${data.image1}"><img src="${data.image2}"><img src="${data.image3}">`
