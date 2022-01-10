@@ -1,6 +1,7 @@
 var openid = ''
+var countdown = 60;
 // 发送手机验证码
-function sendVerification () {
+function sendVerification (val) {
   if (!$("#phone").val()) {
     $.alert('请输入手机号')
     return
@@ -8,14 +9,27 @@ function sendVerification () {
   let params = {
     phone: $("#phone").val()
   }
+  settime(val)
   getApi('post', '/login/send-code', params).then(res => {
-    let data = res.data
-    getApi('post', '/login/get-byte-openid', { code: data.code }).then(res => {
-      openid = data.openid
-    })
-
+    $.alert(res.msg || '发送成功')
   })
 }
+function settime (val) {
+  if (countdown == 0) {
+    val.removeAttribute("disabled");
+    $(val).html("获取验证码")
+    countdown = 60;
+  } else {
+    val.setAttribute("disabled", true);
+    $(val).html("获取验证码(" + countdown + ")")
+    countdown--;
+    setTimeout(function () {
+      settime(val)
+    }, 1000)
+  }
+
+}
+
 // 提交点击
 function loginSubmit () {
   if (!$("#phone").val()) {
