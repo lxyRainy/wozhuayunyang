@@ -31,3 +31,19 @@
     z-index: 99;
     border-radius: 100%;
 }
+.unlock_video{
+  position: absolute;
+  color: #fff;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translate( 0, -50%);
+  text-align: center;
+  font-size: 5vw;
+}
+.org_phone{
+  color: var(--light-green-color);
+}
+.org_phone:before{
+  content:url(../images/pet_detail/phone.svg) !important
+}

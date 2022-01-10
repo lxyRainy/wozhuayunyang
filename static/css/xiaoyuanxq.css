@@ -113,7 +113,7 @@ footer{
     color: var(--light-green-color);
     font-size: 4.5vw;
     padding-left: 4vw;
-    padding-bottom: 2vw;
+    padding-bottom: 8vw;
     line-height: 10vw;
 }
 .pay_block button{
@@ -123,5 +123,4 @@ footer{
     font-size: 4vw;
     /* line-height: 10vw; */
     color: #ffffff;
-   
 }

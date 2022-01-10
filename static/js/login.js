@@ -49,4 +49,12 @@ function loginSubmit () {
     $.alert('请勾选已阅读并同意')
     return
   }
+  let params = {
+    phone: $("#phone").val(),
+    code: $("#yzm").val(),
+    byte_openid: ''
+  }
+  getApi('post', '/login/phone', params).then(res => {
+    window.location.href = 'home.html'
+  })
 }
