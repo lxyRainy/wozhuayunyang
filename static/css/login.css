@@ -1,0 +1,46 @@
+body{
+  background-color: #fff;
+}
+.mytitle{
+  font-size: 5vw;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 10vw;
+}
+.my_agree{
+  display: flex;
+  padding-top: 6vw;
+  padding-left: 10px;
+  justify-content: center;
+}
+.main_content{
+  margin-top: 12vw;
+}
+.weui-agree__text {
+  /* color: #999; */
+  font-size: 3.3vw;
+}
+.weui-agree__text b {
+  color: #586c94;
+}
+.weui-agree{
+  /* float: left; */
+  padding: 0 2vw;
+}
+.weui-btn-area{
+  margin-top: 20vw;
+}
+.weui-btn_primary{
+  background-color: var(--light-green-color);
+  color: white;
+  border-radius: 15px;
+  border-radius: 33px;
+  width: 75%;
+  border: none;
+}
+.weui-cells:after{
+  display: none;
+}
+.weui-vcode-btn{
+  color: var(--light-green-color);
+}

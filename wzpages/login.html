@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link rel="stylesheet" href="../static/css/common.css" />
+  <link rel="stylesheet" href="../static/components/weui/jquery-weui.css" />
+  <link rel="stylesheet" href="../static/components/weui/weui.css" />
+  <link rel="stylesheet" href="../static/css/login.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>登录</title>
+</head>
+
+<body>
+
+  <section class="main_content">
+    <!-- <form action=""> -->
+    <img src="../static/images/login/login_img2.png" alt="">
+    <div class="mytitle">短信验证码登录</div>
+
+    <!-- <div class="my_row">
+        <label for="">手机号：</label>
+        <input type="text" value="请输入手机号">
+      </div> -->
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">手机号</label></div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="number" placeholder="请输入手机号" pattern="[0-9]*" id="phone">
+        </div>
+      </div>
+      <div class="weui-cell weui-cell_vcode">
+        <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="number" placeholder="请输入验证码">
+        </div>
+        <div class="weui-cell__ft">
+          <button class="weui-vcode-btn" onclick="sendVerification()">获取验证码</button>
+        </div>
+      </div>
+      <div class="weui-cell my_agree">
+        <label for="weuiAgree" class="weui-agree">
+          <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+        </label>
+        <span class="weui-agree__text">
+          我已阅读并同意<b onclick='window.open("http://wozhuaapi.newpi.net/document/agreement")'>《用户条款》</b>和
+          <b onclick='window.open("http://wozhuaapi.newpi.net/document/privacy")'>《隐私政策》</b>
+        </span>
+      </div>
+
+
+    </div>
+    <div class="weui-btn-area">
+      <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</a>
+    </div>
+    <!-- </form> -->
+
+  </section>
+  <script type="text/javascript" src="../static/js/common/md5.js"></script>
+  <script type="text/javascript" src="../static/js/common/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="../static/components/weui/jquery-weui.min.js"></script>
+  <script type="text/javascript" src="../static/components/weui/weui.min.js"></script>
+  <script type="text/javascript" src="../static/js/common/common.js"></script>
+  <script type="text/javascript" src="../static/js/login.js"></script>
+  <!-- <script type="text/javascript" src="../static/js/common/vconsole.min.js"></script> -->
+</body>
+
+</html>

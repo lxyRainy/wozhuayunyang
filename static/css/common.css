@@ -25,9 +25,11 @@ ul, li,ol {
     list-style: none;
 }
 a {
+  /* color: -webkit-link; */
     text-decoration: none;
     outline:none;
 }
+
 input {
     border: none;
     outline: none;
