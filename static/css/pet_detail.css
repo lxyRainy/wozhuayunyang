@@ -1,0 +1,15 @@
+.xiaoyuan_gift{
+    overflow: hidden;
+    height: 76vw;
+}
+.xiaoyuan_gift>img{
+    height: auto;
+    width: 100%;
+}
+.pet_notice{
+    display: flex;
+    align-items: flex-start;
+}
+.pet_notice>img{
+    margin-right: 2vw;
+}

@@ -1,0 +1,40 @@
+#petsList{
+    padding-top: 13.5vw;
+}
+.pets_list{
+    display: flex;
+    border-bottom: 1px solid var(--light-green-color);
+    padding: 4vw 2vw 5vw;
+}
+.pets_list>img{
+    width: 18vw;
+    height: 18vw;
+    border-radius: 5px;
+    margin-right: 2vw;
+}
+.pets_info{
+    width: 80vw;
+}
+.pets_info>p{
+    display: flex;
+    justify-content: space-between;
+}
+.pets_info>p>span{
+    font-weight: 600;
+}
+.pet_name>b{
+    color: var(--orange-color);
+    border: 1px solid var(--orange-color);
+    border-radius: 5px;
+    padding: 0 5vw;
+    font-size: 3vw;
+    height: 5vw;
+    line-height: 5vw;
+}
+.pet_no{
+    font-size: 3.2vw;
+}
+.pet_intro{
+    color: var(--light-green-color);
+    font-size: 3.3vw;
+}
