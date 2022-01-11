@@ -3,7 +3,7 @@ $(function () {
   console.log("id==", id)
   getPets(id)
 })
-function getPets(id) {
+function getPets (id) {
   let param = {
     org_id: id,
     // status: 1,
@@ -16,12 +16,14 @@ function getPets(id) {
         // 状态 0全部 1未认养 2认养中
         let status = item.status
         let str = ""
+        let clickStr = ''
         if (status === 1) {
-          str = `<b onclick="openPetDetail(${item.id})">云养它</b>`
+          str = `<b >云养它</b>`
+          clickStr = `onclick="openPetDetail(${item.id})"`
         } else {
           str = `<b style="background:var(--light-green-color);border-color:var(--light-green-color);color:#fff">已云养</b>`
         }
-        html += `<div class="pets_list">
+        html += `<div class="pets_list" ${clickStr}>
               <img src="${item.avatar}" alt="宠物">
               <div class="pets_info">
                   <p class="pet_name">
@@ -40,6 +42,6 @@ function getPets(id) {
     $("#petsList").html(html)
   })
 }
-function openPetDetail(id) {
+function openPetDetail (id) {
   window.location.href = "pet_detail.html?id=" + id
 }
