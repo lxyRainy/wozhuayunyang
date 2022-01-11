@@ -17,16 +17,26 @@ function getPets(id) {
         let status = item.status
         let str = ""
         let clickStr = ""
+        let cloudUser = ""
         if (status === 1) {
           str = `<b >云养它</b>`
           clickStr = `onclick="openPetDetail(${item.id})"`
         } else {
           str = `<b style="background:var(--light-green-color);border-color:var(--light-green-color);color:#fff">已云养</b>`
+          // if (item.cloudUser) {
+          let user = item.cloud_user
+          let avatar = user.avatar
+          if (user.avatar.indexOf("tx_") !== -1) {
+            avatar = "../../static/images/pet_detail/" + avatar
+          }
+          cloudUser = `<div class="pet_user"><img src="${avatar}" >${user.nickname} 云养</div>`
+          // }
         }
         // <img src="${item.avatar}" alt="宠物">
         html += `<div class="pets_list" ${clickStr}>
               <p style="background-image:url(${item.avatar})" class="pets_img"></p>
               <div class="pets_info">
+                ${cloudUser}
                   <p class="pet_name">
                   <span>${item.org_nickname}</span>
                   ${str}

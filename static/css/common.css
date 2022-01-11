@@ -68,6 +68,9 @@ img,object{width:auto;max-width:100%;/*height:auto;*/width:auto\9;/* for ie8 */-
     background-size: cover;
     height: 4.5vw;
 }
+/* .hide_header{
+    padding-top: 0;
+} */
 /* header结束 */
 /* weui样式修改 */
 .weui-toast{

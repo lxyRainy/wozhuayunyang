@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="static/css/common.css" />
+    <link rel="stylesheet" href="static/components/weui/jquery-weui.css" />
+    <link rel="stylesheet" href="static/components/weui/weui.css" />
+    <link rel="stylesheet" href="static/css/home.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>云养区</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <link rel="stylesheet" href="static/css/common.css" />
-  <link rel="stylesheet" href="static/components/weui/jquery-weui.css" />
-  <link rel="stylesheet" href="static/components/weui/weui.css" />
-  <link rel="stylesheet" href="static/css/home.css" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>云养区</title>
-</head>
-
-<body>
-  <div class="arrow_header">
-    云养区
-  </div>
-  <section class="main_content">
-    <div class="home_top_block">
-      <div class="home_top">
-        <input type="text" placeholder="请输入小院所在城市或小院名称" oninput="xyncChange(this)" />
-        <img src="static/images/home/close_pic.svg" alt="" onclick="chaClick()" />
+  <body>
+    <div class="arrow_header">云养区</div>
+    <section class="main_content hide_header hide_header2">
+      <div class="home_top_block">
+        <div class="home_top">
+          <input
+            type="text"
+            placeholder="请输入小院所在城市或小院名称"
+            oninput="xyncChange(this)"
+          />
+          <img
+            src="static/images/home/close_pic.svg"
+            alt=""
+            onclick="chaClick()"
+          />
+        </div>
       </div>
-    </div>
 
-    <div class="home_content" id="home_content">
-      <!-- <div class="content_item" onclick="openXyxq()">
+      <div class="home_content" id="home_content">
+        <!-- <div class="content_item" onclick="openXyxq()">
           <img src="static/images/home/cat.png" alt="" />
           <p>哈比的猫小院</p>
           <div class="content_msg"><b>$9.8</b><span>剩余:1</span></div>
@@ -40,15 +45,26 @@
           <p>哈比的猫小院</p>
           <div class="content_msg"><b>$9.8</b><span>剩余:1</span></div>
         </div> -->
-    </div>
-  </section>
-  <script type="text/javascript" src="static/js/common/md5.js"></script>
-  <script type="text/javascript" src="static/js/common/jquery-3.4.1.min.js"></script>
-  <script type="text/javascript" src="static/components/weui/jquery-weui.min.js"></script>
-  <script type="text/javascript" src="static/components/weui/weui.min.js"></script>
-  <script type="text/javascript" src="static/js/common/common.js"></script>
-  <script type="text/javascript" src="static/js/home.js"></script>
-  <!-- <script type="text/javascript" src="static/js/common/vconsole.min.js"></script> -->
-</body>
-
+      </div>
+    </section>
+    <script type="text/javascript" src="static/js/common/md5.js"></script>
+    <script
+      type="text/javascript"
+      src="static/js/common/jquery-3.4.1.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="static/components/weui/jquery-weui.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="static/components/weui/weui.min.js"
+    ></script>
+    <script type="text/javascript" src="static/js/common/common.js"></script>
+    <script type="text/javascript" src="static/js/home.js"></script>
+    <!-- <script
+      type="text/javascript"
+      src="static/js/common/vconsole.min.js"
+    ></script> -->
+  </body>
 </html>

@@ -2,6 +2,7 @@
 .xiaoyuan_top{
     padding-top: 13.9vw;
     color: #ffffff;
+    position: relative;
 }
 .xiaoyuan_gift{
     width: 100%;
@@ -126,4 +127,9 @@ footer{
 }
 #orgImgs>img{
   margin: 2vw 0;
+}
+.back_home{
+    position: absolute;
+    bottom: 80vw;
+    left: 2vw;
 }
