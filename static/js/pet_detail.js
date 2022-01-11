@@ -29,7 +29,7 @@ function showPetPge (data) {
   $("#jgName").html(org.org_name)
   //   $(".pet_notice>div").html(org.note)
   // 云养价格
-  $("#yunyang_price").html("￥" + fmPrice(data.first_price / 100))
+  $("#yunyang_price").html("￥" + fmPrice(data.renew_price / 20) + "（5周）")
   showVideos(data.files)
 }
 async function showVideos (files) {
