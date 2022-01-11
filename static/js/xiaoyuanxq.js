@@ -62,6 +62,11 @@ function initOrgPage (data) {
 // 云养点击事件
 function yunyangClick () {
   console.log("云养点击事件")
+  if (!sfLogin) {
+    window.location.href = 'login.html'
+  }
+
+  return
   let params = {
     org_id: id,
     type: 1,

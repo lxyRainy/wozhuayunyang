@@ -1,8 +1,9 @@
-var router = "https://adopt.wozhua.net"
-var key = "8da71946065811ec8e456c92bf623eda"
+var router = "https://adopt.wozhua.net";
+var key = "8da71946065811ec8e456c92bf623eda";//调接口用的
+var sfLogin = sessionStorage.getItem('sfLogin') || false;// 是否登录
 // 价格格式化
 function fmPrice (num) {
-  return num.toFixed(2)
+  return num.toFixed(2);
 }
 // 日期格式化
 Date.prototype.format = function (format) {

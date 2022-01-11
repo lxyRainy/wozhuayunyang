@@ -1,7 +1,7 @@
 var openid = ""
 var countdown = 60
 // 发送手机验证码
-function sendVerification(val) {
+function sendVerification (val) {
   if (!$("#phone").val()) {
     $.alert("请输入手机号")
     return
@@ -14,7 +14,7 @@ function sendVerification(val) {
     $.alert(res.msg || "发送成功")
   })
 }
-function settime(val) {
+function settime (val) {
   if (countdown == 0) {
     val.removeAttribute("disabled")
     $(val).html("获取验证码")
@@ -30,7 +30,7 @@ function settime(val) {
 }
 
 // 提交点击
-function loginSubmit() {
+function loginSubmit () {
   if (!$("#phone").val()) {
     $.alert("请输入手机号")
     return
@@ -53,7 +53,9 @@ function loginSubmit() {
     code: $("#yzm").val(),
     byte_openid: "",
   }
-  window.location.href = "/wzpages/home.html"
+  sfLogin = true
+  localStorage.setItem('sfLogin', sfLogin)
+  history.back(-1)
   // getApi('post', '/login/phone', params).then(res => {
   //   window.location.href = 'home.html'
   // })

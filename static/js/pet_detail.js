@@ -120,3 +120,6 @@ function getVideoBase64 (url) {
 //   }
 // };
 
+function yunyangClick (params) {
+  window.location.href = 'login.html'
+}
