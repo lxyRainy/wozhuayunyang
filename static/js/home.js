@@ -4,11 +4,12 @@ var allOrg = sessionStorage.getItem("allOrg")
 
 $(function () {
   console.log($(".home_top input").val())
+  // $.showLoading('加载中')
   getHomeCx()
 })
 function getHomeCx () {
-  console.log("sessionStorage.getItem", sessionStorage.getItem("allOrg"))
-  console.log("allOrg", allOrg)
+  // console.log("sessionStorage.getItem", sessionStorage.getItem("allOrg"))
+  // console.log("allOrg", allOrg)
   if (allOrg.length === 0) {
     // console.log('111')
     getApi("post", "/ca-caring-organization/list").then((res) => {

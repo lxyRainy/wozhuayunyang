@@ -1,7 +1,7 @@
 var router = "https://adopt.wozhua.net"
 var key = "8da71946065811ec8e456c92bf623eda"
 // 价格格式化
-function fmPrice(num) {
+function fmPrice (num) {
   return num.toFixed(2)
 }
 // 日期格式化
@@ -30,12 +30,12 @@ Date.prototype.format = function (format) {
   }
   return format
 }
-function formatNumber(n) {
+function formatNumber (n) {
   n = n.toString()
   return n[1] ? n : "0" + n
 }
 // 将时间戳（秒）转换为时间
-function formatTime(time) {
+function formatTime (time) {
   let date = new Date(time * 1000)
   var year = date.getFullYear()
   var month = date.getMonth() + 1
@@ -61,7 +61,7 @@ function formatTime(time) {
  * @param {*} data 传参
  * @returns
  */
-function getApi(method, url, data) {
+function getApi (method, url, data) {
   console.log("data===", data)
   return new Promise(function (resolve, reject) {
     let timestamp = new Date().getTime().toString().substr(0, 10)
@@ -72,7 +72,7 @@ function getApi(method, url, data) {
       timestamp,
       sign,
     }
-    // $.showLoading('加载中')
+    $.showLoading('加载中')
     $.ajax({
       // 请求方式
       type: method,
@@ -85,7 +85,7 @@ function getApi(method, url, data) {
       // header: header,
       // 请求成功
       success: function (res) {
-        // $.hideLoading()
+        $.hideLoading()
         res = JSON.parse(res)
         // console.log('data', params)
         // console.log('res', res)
@@ -96,14 +96,14 @@ function getApi(method, url, data) {
         }
       },
       error: function () {
-        // $.hideLoading()
+        $.hideLoading()
         $.alert("网络错误")
       },
     })
   })
 }
 // 获取路径中的参数
-function getUrlParam(name) {
+function getUrlParam (name) {
   var result = window.location.search.match(
     new RegExp("[?&]" + name + "=([^&]+)", "i")
   )
@@ -113,7 +113,7 @@ function getUrlParam(name) {
   return result[1]
 }
 // 将所有空格替换为换行符
-function toBr(string) {
+function toBr (string) {
   //替换所有的换行符
   string = string.replace(/\r\n/g, "<br>")
   string = string.replace(/\n/g, "<br>")
@@ -122,7 +122,7 @@ function toBr(string) {
   string = string.replace(/\s/g, "&nbsp;")
   return string
 }
-function onBridgeReady() {
+function onBridgeReady () {
   WeixinJSBridge.invoke(
     "getBrandWCPayRequest",
     {

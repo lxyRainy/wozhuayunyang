@@ -61,3 +61,6 @@
 .content_msg b{
     color: green;
 }
+.weui-toast{
+  margin-left: 0;
+}

@@ -12,7 +12,7 @@
     justify-content: center;
 }
 .xiaoyuan_gift>img{
-    height: 100%;
+    height: 80%;
 }
 .xiaoyuan_top_item{
     background: var(--light-green-color);
@@ -123,4 +123,7 @@ footer{
     font-size: 4vw;
     /* line-height: 10vw; */
     color: #ffffff;
+}
+#orgImgs>img{
+  margin: 2vw 0;
 }
