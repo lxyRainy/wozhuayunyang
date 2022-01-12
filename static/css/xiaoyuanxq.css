@@ -131,7 +131,7 @@ footer{
 }
 .back_home{
   position: absolute;
-  bottom: 80%;
+  top: 11.9vw;
   left: 2vw;
   z-index: 101;
 }

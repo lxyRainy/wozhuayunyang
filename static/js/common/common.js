@@ -133,7 +133,8 @@ function hideHeader () {
     $(".arrow_header").hide()
     $(".hide_header").css("padding-top", 0)
     $(".home_content").css({ "margin-top": 0, "padding-top": "13vw" })
-    $(".hide_header2").css("padding-top", "2vw")
+    $(".hide_header2").css("padding-top", "0")
+    $(".back_home").css('top', '2vw')
   }
 }
 // 判断是否是微信浏览器
