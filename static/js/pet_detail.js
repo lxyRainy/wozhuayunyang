@@ -3,7 +3,7 @@ $(function () {
   console.log("id==", id)
   getPetDetail(id)
 })
-function getPetDetail(id) {
+function getPetDetail (id) {
   let param = {
     pet_id: id,
   }
@@ -17,7 +17,7 @@ function getPetDetail(id) {
     }
   })
 }
-function showPetPge(data) {
+function showPetPge (data) {
   // 顶部图
   $("#topImg").attr("src", data.avatar)
   $("#petNo").html("编号：" + data.pet_no)
@@ -33,7 +33,7 @@ function showPetPge(data) {
   $("#yunyang_price").html("￥" + fmPrice(data.renew_price / 20) + "（5周）")
   showVideos(data.files)
 }
-async function showVideos(files) {
+async function showVideos (files) {
   let html = ""
   const len = files.length
   if (files && len) {
@@ -44,18 +44,16 @@ async function showVideos(files) {
     
     <div class="video_item">
       <div style="line-height:8vw;">拍摄于${formatTime(item.add_time)}</div>
-      <video src="${
-        item.file_url
-      }" class="pet_video"  webkit-playsinline="true" controls="controls" id="myVideo" poster="/static/images/home/cat.png" ></video>
+      <video src="${item.file_url
+      }" class="pet_video"  webkit-playsinline="true" controls="controls" id="myVideo" poster="static/images/home/cat.png" ></video>
     </div>      
     `
     html += `
     <div class="video_item">
       <div class="pet_video"  style="filter:contrast(5%) blur(5px);background:black;height:100vw"></div>
-      ${
-        len > 1
-          ? `<p class="unlock_video">云养成功后解锁剩余${len - 1}个视频</p>`
-          : ""
+      ${len > 1
+        ? `<p class="unlock_video">云养成功后解锁剩余${len - 1}个视频</p>`
+        : ""
       } 
     </div>      
     `
@@ -72,7 +70,7 @@ async function showVideos(files) {
   }
 }
 
-function getVideoBase64(url) {
+function getVideoBase64 (url) {
   // console.log('url', url)
   return new Promise(function (resolve, reject) {
     let dataURL = ""
@@ -122,6 +120,6 @@ function getVideoBase64(url) {
 //   }
 // };
 
-function yunyangClick(params) {
+function yunyangClick (params) {
   window.location.href = "login.html"
 }

@@ -3,7 +3,7 @@ $(function () {
   console.log("id==", id)
   getPets(id)
 })
-function getPets(id) {
+function getPets (id) {
   let param = {
     org_id: id,
     // status: 1,
@@ -27,7 +27,7 @@ function getPets(id) {
           let user = item.cloud_user
           let avatar = user.avatar
           if (user.avatar.indexOf("tx_") !== -1) {
-            avatar = "../../static/images/pet_detail/" + avatar
+            avatar = "static/images/pet_detail/" + avatar
           }
           cloudUser = `<div class="pet_user"><img src="${avatar}" >${user.nickname} 云养</div>`
           // }
@@ -53,6 +53,6 @@ function getPets(id) {
     $("#petsList").html(html)
   })
 }
-function openPetDetail(id) {
+function openPetDetail (id) {
   window.location.href = "pet_detail.html?id=" + id
 }
