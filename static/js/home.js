@@ -1,7 +1,7 @@
 var allOrg = sessionStorage.getItem("allOrg")
   ? JSON.parse(sessionStorage.getItem("allOrg"))
   : [] //所有组织
-
+var allOrgHtml = ''
 $(function () {
   // hideHeader()
   console.log($(".home_top input").val())
@@ -9,7 +9,7 @@ $(function () {
   getHomeCx()
 })
 
-function getHomeCx() {
+function getHomeCx () {
   // console.log("sessionStorage.getItem", sessionStorage.getItem("allOrg"))
   // console.log("allOrg", allOrg)
   if (allOrg.length === 0) {
@@ -19,7 +19,7 @@ function getHomeCx() {
       let data = res.data
       allOrg = data
       sessionStorage.setItem("allOrg", JSON.stringify(allOrg))
-      showOrgs(data)
+      showOrgs(data, true)
     })
   } else {
     // console.log('222')
@@ -28,27 +28,49 @@ function getHomeCx() {
       $(".home_top img").show()
       getOrgsByInput(myinput)
     } else {
-      showOrgs(allOrg)
+      showOrgs(allOrg, true)
     }
   }
 }
-// 渲染所有组织页面
-function showOrgs(data) {
+
+/**
+ * 渲染所有组织页面
+ * @param {*} data 渲染的数据
+ * @param {*} flag 是否渲染所有数据，true为是
+ */
+function showOrgs (data, flag) {
   let html = ""
-  data.map((item, i) => {
-    let price = fmPrice(item.first_price / 100)
-    html += ` <div class="content_item" onclick="openXyxq('${item.id}')">
-    <img src="${item.box_image || "../static/images/home/cat.png"}" alt="" />
-    <p>${item.org_name}</p>
-    <div class="content_msg"><b>￥${price}</b><span>剩余:${
-      item.pet_num
-    }</span></div>
-  </div>`
-    $("#home_content").html(html)
-  })
+  if (!flag) {// 模糊搜索的
+    data.map((item, i) => {
+      let price = fmPrice(item.first_price / 100)
+      html += ` <div class="content_item" onclick="openXyxq('${item.id}')">
+      <img src="${item.box_image || "../static/images/home/cat.png"}" alt="" />
+      <p>${item.org_name}</p>
+      <div class="content_msg"><b>￥${price}</b><span>剩余:${item.pet_num
+        }</span></div>
+    </div>`
+    })
+  } else {
+    if (!allOrgHtml) {
+      data.map((item, i) => {
+        let price = fmPrice(item.first_price / 100)
+        html += ` <div class="content_item" onclick="openXyxq('${item.id}')">
+        <img src="${item.box_image || "../static/images/home/cat.png"}" alt="" />
+        <p>${item.org_name}</p>
+        <div class="content_msg"><b>￥${price}</b><span>剩余:${item.pet_num
+          }</span></div>
+      </div>`
+      })
+    } else {
+      allOrgHtml = html
+    }
+
+  }
+
+  $("#home_content").html(html)
 }
 // 输入框change事件
-function xyncChange() {
+function xyncChange () {
   // console.log("v", $(v).val())
   let myinput = $(".home_top input").val()
   if (!myinput) {
@@ -61,7 +83,7 @@ function xyncChange() {
   }
 }
 // 模糊搜索
-function getOrgsByInput(val) {
+function getOrgsByInput (val) {
   let newArr = allOrg.filter((item, i) => {
     return (
       item.org_name.indexOf(val) !== -1 ||
@@ -78,12 +100,12 @@ function getOrgsByInput(val) {
   }
 }
 // 叉的点击事件
-function chaClick() {
+function chaClick () {
   $(".home_top img").hide()
   $(".home_top input").val("")
   showOrgs(allOrg)
 }
 // 打开小院详情
-function openXyxq(id) {
+function openXyxq (id) {
   window.location.href = "xiaoyuanxq.html?id=" + id
 }

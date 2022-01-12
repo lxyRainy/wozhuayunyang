@@ -12,13 +12,13 @@
     width: 100%;
     background: #ffffff;
     border-radius: 5px;
-    height: 8vw;
-    line-height: 8vw;
+    height: 10vw;
+    line-height: 10vw;
     /* margin-bottom: 2vw; */
     position: relative;
 }
 .home_top input{
-    width: 100%;
+    width: 80%;
     height: 100%;
     padding-left: 2vw;
     font-size: 3.5vw;
@@ -28,7 +28,7 @@
     content:url(../images/home/close_pic.svg);
     display: block;
     position: absolute;
-    right: 2vw;
+    right: 5vw;
     top: 19%;
    display: none;
 }
