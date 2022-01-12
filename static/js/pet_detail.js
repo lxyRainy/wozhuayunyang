@@ -41,7 +41,6 @@ async function showVideos (files) {
     // const videoImg = await this.getVideoBase64(item.file_url) // video的url
     // getVideoFrame(3);
     html = `
-    
     <div class="video_item">
       <div style="line-height:8vw;">拍摄于${formatTime(item.add_time)}</div>
       <video src="${item.file_url
@@ -121,5 +120,9 @@ function getVideoBase64 (url) {
 // };
 
 function yunyangClick (params) {
-  window.location.href = "login.html"
+  if (!sfLogin) {
+    window.location.href = "login.html"
+  } else {
+    $.alert('此功能暂未开放')
+  }
 }
