@@ -43,6 +43,7 @@ img,object{width:auto;max-width:100%;/*height:auto;*/width:auto\9;/* for ie8 */-
     height: 100vw;
     line-height: 100vw;
     text-align: center;
+    opacity: 0.65;
 }
 /* header开始 */
 .arrow_header{

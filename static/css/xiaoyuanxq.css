@@ -130,7 +130,11 @@ footer{
   width: 100%;
 }
 .back_home{
-    position: absolute;
-    bottom: 85vw;
-    left: 2vw;
+  position: absolute;
+  bottom: 80%;
+  left: 2vw;
+  z-index: 101;
+}
+.back_home>img{
+  width: 8vw;
 }

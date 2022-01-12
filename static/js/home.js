@@ -84,19 +84,22 @@ function xyncChange () {
 }
 // 模糊搜索
 function getOrgsByInput (val) {
+  val = val.toUpperCase()
   let newArr = allOrg.filter((item, i) => {
     return (
-      item.org_name.indexOf(val) !== -1 ||
-      item.city.indexOf(val) !== -1 ||
-      item.province.indexOf(val) !== -1 ||
-      item.area.indexOf(val) !== -1
+      item.org_name.toUpperCase().indexOf(val) !== -1 ||
+      item.city.toUpperCase().indexOf(val) !== -1 ||
+      item.province.toUpperCase().indexOf(val) !== -1 ||
+      item.area.toUpperCase().indexOf(val) !== -1
     )
   })
   console.log("newArr".newArr)
   if (newArr.length) {
     showOrgs(newArr)
   } else {
-    $("#home_content").html("暂无数据")
+    // html = '<div class="weui-loadmore weui-loadmore_line"><span class="weui-loadmore__tips">暂无数据</span></div>'
+    html = "<div class='no_data'>暂无数据</div>"
+    $("#home_content").html(html)
   }
 }
 // 叉的点击事件
