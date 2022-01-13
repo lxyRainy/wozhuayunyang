@@ -39,12 +39,11 @@ async function showVideos (files) {
   if (files && len) {
     let item = files[0]
 
-    // const videoImg = await this.getVideoBase64(item.file_url) // video的url
-    // getVideoFrame(3);
+    // x5-video-player-type="h5"
     html = `
     <div class="video_item">
       <div style="line-height:8vw;">拍摄于${formatTime(item.add_time)}</div>
-      <video  class="pet_video"  webkit-playsinline="true" controls="controls" id="myVideo"  style="object-fit:cover" x5-video-player-type="h5" poster="static/images/pet_detail/black.jpg" >
+      <video  class="pet_video"  webkit-playsinline="true" controls="controls" id="myVideo"  style="object-fit:cover"  poster="static/images/pet_detail/black.jpg" >
       <source src="${item.file_url}">
       </video>
     </div>      
