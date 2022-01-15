@@ -6,7 +6,7 @@ $(function () {
   getOrgInfo(id)
   wechatInit()
 })
-function wechatInit () {
+function wechatInit() {
   // wx.config({
   //   debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
   //   appId: '', // 必填，公众号的唯一标识
@@ -17,7 +17,7 @@ function wechatInit () {
   // });
 }
 // 获取机构信息
-function getOrgInfo (id) {
+function getOrgInfo(id) {
   let param = {
     org_id: id,
   }
@@ -32,7 +32,7 @@ function getOrgInfo (id) {
   })
 }
 // 返显页面
-function initOrgPage (data) {
+function initOrgPage(data) {
   // 顶部图
   $("#topImg").attr("src", data.top_image)
   // 小院名称
@@ -61,13 +61,14 @@ function initOrgPage (data) {
   $("#orgDetail").show()
 }
 // 云养点击事件
-function yunyangClick () {
+function yunyangClick() {
   console.log("云养点击事件sfLogin", sfLogin)
 
   if (!sfLogin) {
-    window.location.href = "login.html"
+    weChatLogin("login.html")
+    // window.location.href = "login.html"
   } else {
-    $.alert('此功能暂未开放')
+    $.alert("此功能暂未开放")
   }
 
   return
@@ -84,7 +85,7 @@ function yunyangClick () {
     }
   })
 }
-function payPet (order_no) {
+function payPet(order_no) {
   let param1 = {
     user_id: userId,
     order_no,

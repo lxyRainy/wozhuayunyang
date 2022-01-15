@@ -1,12 +1,15 @@
 var router = "https://adopt.wozhua.net"
 var key = "8da71946065811ec8e456c92bf623eda" //调接口用的
 var sfLogin = localStorage.getItem("sfLogin") || false // 是否登录
+var appid = "wx80b0358d642bed86"
+var wxUser = localStorage.getItem("wxUser") // 微信用户信息
+var openid = "";
 console.log("sfLogin", sfLogin)
 $(function () {
   hideHeader()
 })
 // 价格格式化
-function fmPrice (num) {
+function fmPrice(num) {
   return num.toFixed(2)
 }
 // 日期格式化
@@ -35,12 +38,12 @@ Date.prototype.format = function (format) {
   }
   return format
 }
-function formatNumber (n) {
+function formatNumber(n) {
   n = n.toString()
   return n[1] ? n : "0" + n
 }
 // 将时间戳（秒）转换为时间
-function formatTime (time) {
+function formatTime(time) {
   let date = new Date(time * 1000)
   var year = date.getFullYear()
   var month = date.getMonth() + 1
@@ -66,7 +69,7 @@ function formatTime (time) {
  * @param {*} data 传参
  * @returns
  */
-function getApi (method, url, data) {
+function getApi(method, url, data) {
   console.log("data===", data)
   return new Promise(function (resolve, reject) {
     let timestamp = new Date().getTime().toString().substr(0, 10)
@@ -108,7 +111,7 @@ function getApi (method, url, data) {
   })
 }
 // 获取路径中的参数
-function getUrlParam (name) {
+function getUrlParam(name) {
   var result = window.location.search.match(
     new RegExp("[?&]" + name + "=([^&]+)", "i")
   )
@@ -118,7 +121,7 @@ function getUrlParam (name) {
   return result[1]
 }
 // 将所有空格替换为换行符
-function toBr (string) {
+function toBr(string) {
   //替换所有的换行符
   string = string.replace(/\r\n/g, "<br>")
   string = string.replace(/\n/g, "<br>")
@@ -128,7 +131,7 @@ function toBr (string) {
   return string
 }
 // 根据是否是微信浏览器判断header隐藏
-function hideHeader () {
+function hideHeader() {
   if (is_weixn()) {
     $(".arrow_header").hide()
     $(".hide_header").css("padding-top", 0)
@@ -138,7 +141,7 @@ function hideHeader () {
   }
 }
 // 判断是否是微信浏览器
-function is_weixn () {
+function is_weixn() {
   var ua = navigator.userAgent.toLowerCase()
   if (ua.match(/MicroMessenger/i) == "micromessenger") {
     console.log("微信浏览器")
@@ -148,7 +151,7 @@ function is_weixn () {
     return false
   }
 }
-function onBridgeReady () {
+function onBridgeReady() {
   WeixinJSBridge.invoke(
     "getBrandWCPayRequest",
     {
@@ -199,23 +202,53 @@ function onBridgeReady () {
 // }
 
 /**
- * 
+ *
  * @param fn 事件触发的回调函数
  * @param delay 延迟时间
  */
-function debounce (fn, delay = 500) {
-  let timer = null;
+function debounce(fn, delay = 500) {
+  let timer = null
 
   return function () {
-
     if (timer) {
-      clearTimeout(timer);
+      clearTimeout(timer)
     }
     timer = setTimeout(() => {
       // 执行事件的回调函数
-      fn.apply(this, arguments);
+      fn.apply(this, arguments)
       // 执行后清空定时器
       timer = null
     }, delay)
+  }
+}
+// 打开验证页
+function openAuthorizePage(url) {
+  let response_type = "code"
+  let scope = "snsapi_base"
+  let state = "STATE"
+  var router = "http://yunyangh5.wozhua.net/wozhuayunyang"
+  window.open(
+    `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${
+      router + url
+    }&response_type=${response_type}&scope=${scope}&state=${state}#wechat_redirect`
+  )
+}
+
+// 微信公众号登录
+function weChatLogin(url) {
+  let code = getUrlParam("code")
+  if (code) {
+    getApi("post", "/login/login-mpcode", { code: code }).then((res) => {
+      if (res.status) {
+        // code 登录成功
+        localStorage.setItem("wxUser", JSON.stringify(res.data))
+        localStorage.setItem("sfLogin", true)
+      } else {
+        sessionStorage.setItem('openid',res.data.openid)
+        window.location.href = "login.html"
+      }
+    })
+  } else {
+    openAuthorizePage(url)
   }
 }
