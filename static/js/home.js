@@ -123,5 +123,6 @@ function chaClick() {
 }
 // 打开小院详情
 function openXyxq(id) {
+  // id = 46
   window.location.href = "xiaoyuanxq.html?id=" + id
 }

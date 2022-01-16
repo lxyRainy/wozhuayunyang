@@ -1,82 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/components/weui/jquery-weui.css" />
+    <link rel="stylesheet" href="static/components/weui/weui.css" />
+    <link rel="stylesheet" href="static/css/common.css" />
+    <link rel="stylesheet" href="static/css/xiaoyuanxq.css" />
+    <title>小院详情</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="static/components/weui/jquery-weui.css" />
-  <link rel="stylesheet" href="static/components/weui/weui.css" />
-  <link rel="stylesheet" href="static/css/common.css" />
-  <link rel="stylesheet" href="static/css/xiaoyuanxq.css" />
-  <title>小院详情</title>
-</head>
-
-<body>
-  <div class="arrow_header">
-    <a href="javascript:history.back(-1)"></a>
-  </div>
-  <div id="orgDetail" style="display: none">
-    <section class="xiaoyuan_top hide_header">
-      <div class="back_home" onclick="window.location.href='index.html'">
-        <img src="static/images/xiaoyuanxq/back_home.svg" alt="" />
-      </div>
-      <div class="xiaoyuan_gift">
-        <img src="" alt="" id="topImg" />
-      </div>
-      <div class="xiaoyuan_top_item">
-        <div class="xiaoyuan_price">
-          <b id="animalPrice" class="pet_price">￥0.00</b>
-          <!-- <span>查看小院动态</span> -->
+  <body>
+    <div class="arrow_header">
+      <a href="javascript:history.back(-1)"></a>
+    </div>
+    <div id="orgDetail" style="display: none">
+      <section class="xiaoyuan_top hide_header">
+        <div class="back_home" onclick="window.location.href='index.html'">
+          <img src="static/images/xiaoyuanxq/back_home.svg" alt="" />
         </div>
-        <div class="xiaoyuan_name">
-          <p class="orgName"></p>
-          <div class="name_right">
-            <span>剩余<span id="restAnimal">0</span>只</span>
-            <b id="openPets">指定云养</b>
+        <div class="xiaoyuan_gift">
+          <img src="" alt="" id="topImg" />
+        </div>
+        <div class="xiaoyuan_top_item">
+          <div class="xiaoyuan_price">
+            <b id="animalPrice" class="pet_price">￥0.00</b>
+            <!-- <span>查看小院动态</span> -->
+          </div>
+          <div class="xiaoyuan_name">
+            <p class="orgName"></p>
+            <div class="name_right">
+              <span>剩余<span id="restAnimal">0</span>只</span>
+              <b id="openPets">指定云养</b>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section class="xiaoyuan_infomation">
-      <div class="card">
-        <div id="org_info"></div>
-        <div class="org_tree" id="org_tree">
-          <img src="static/images/home/cat.png" alt="大树" />
-          <p></p>
+      </section>
+      <section class="xiaoyuan_infomation">
+        <div class="card">
+          <div id="org_info"></div>
+          <div class="org_tree" id="org_tree">
+            <img src="static/images/home/cat.png" alt="大树" />
+            <p></p>
+          </div>
         </div>
-      </div>
-      <div class="card" id="org_msg">
-        <p>机构信息</p>
-        <div class="org_address"></div>
-        <div class="orgName" id="jgName"></div>
-      </div>
-      <div class="card">
-        9.9元是你云养宠物的第一周价格，7天到期前如不“延长云养”，该宠物将被纳入小院重新等待云养。无论是否“延长云养”，我们都非常感谢你的支持和付出！
-      </div>
-      <div class="card">
-        <div class="orgName org_words org_title"></div>
-        <div class="org_words" id="org_intro"></div>
-      </div>
-      <div class="card" id="orgImgs"></div>
-    </section>
-    <footer>
-      <div class="pay_block">
-        <span id="" class="pet_price">￥0.00</span>
-        <button onclick="yunyangClick()">云养一只</button>
-      </div>
-    </footer>
-  </div>
+        <div class="card" id="org_msg">
+          <p>机构信息</p>
+          <div class="org_address"></div>
+          <div class="orgName" id="jgName"></div>
+        </div>
+        <div class="card">
+          9.9元是你云养宠物的第一周价格，7天到期前如不“延长云养”，该宠物将被纳入小院重新等待云养。无论是否“延长云养”，我们都非常感谢你的支持和付出！
+        </div>
+        <div class="card">
+          <div class="orgName org_words org_title"></div>
+          <div class="org_words" id="org_intro"></div>
+        </div>
+        <div class="card" id="orgImgs"></div>
+      </section>
+      <footer>
+        <div class="pay_block">
+          <span id="" class="pet_price">￥0.00</span>
+          <button onclick="yunyangClick()">云养一只</button>
+        </div>
+      </footer>
+    </div>
 
-  <section class="xiaoyuan_bottom"></section>
-  <script type="text/javascript" src="static/js/common/md5.js"></script>
-  <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
-  <script type="text/javascript" src="static/js/common/jquery-3.4.1.min.js"></script>
-  <script type="text/javascript" src="static/components/weui/jquery-weui.min.js"></script>
-  <script type="text/javascript" src="static/components/weui/weui.min.js"></script>
-  <script type="text/javascript" src="static/js/common/common.js"></script>
-  <script type="text/javascript" src="static/js/xiaoyuanxq.js"></script>
-  <!-- <script type="text/javascript" src="static/js/common/vconsole.min.js"></script> -->
-</body>
-
+    <section class="xiaoyuan_bottom"></section>
+    <script type="text/javascript" src="static/js/common/md5.js"></script>
+    <script
+      type="text/javascript"
+      src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="static/js/common/jquery-3.4.1.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="static/components/weui/jquery-weui.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="static/components/weui/weui.min.js"
+    ></script>
+    <script type="text/javascript" src="static/js/common/common.js"></script>
+    <script type="text/javascript" src="static/js/xiaoyuanxq.js"></script>
+    <script
+      type="text/javascript"
+      src="static/js/common/vconsole.min.js"
+    ></script>
+  </body>
 </html>

@@ -1,9 +1,9 @@
 var router = "https://adopt.wozhua.net"
 var key = "8da71946065811ec8e456c92bf623eda" //调接口用的
 var sfLogin = localStorage.getItem("sfLogin") || false // 是否登录
-var appid = "wx80b0358d642bed86"
+var appid = "wxaadeae0c92ecddb3"
 var wxUser = localStorage.getItem("wxUser") // 微信用户信息
-var openid = "";
+var openid = ""
 console.log("sfLogin", sfLogin)
 $(function () {
   hideHeader()
@@ -101,6 +101,7 @@ function getApi(method, url, data) {
           resolve(res)
         } else {
           $.alert(res.msg || "网络错误")
+          // resolve(res)
         }
       },
       error: function () {
@@ -222,20 +223,17 @@ function debounce(fn, delay = 500) {
   }
 }
 // 打开验证页
-function openAuthorizePage(url) {
+function openAuthorizePage(url, state) {
   let response_type = "code"
-  let scope = "snsapi_base"
-  let state = "STATE"
-  var router = "http://yunyangh5.wozhua.net/wozhuayunyang"
+  let scope = "snsapi_base" // ""//snsapi_userinfo
+  var router = encodeURIComponent("http://yunyangh5.wozhua.net/" + url)
   window.open(
-    `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${
-      router + url
-    }&response_type=${response_type}&scope=${scope}&state=${state}#wechat_redirect`
+    `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${router}&response_type=${response_type}&scope=${scope}&state=${state}#wechat_redirect`
   )
 }
 
 // 微信公众号登录
-function weChatLogin(url) {
+function weChatLogin(url, state) {
   let code = getUrlParam("code")
   if (code) {
     getApi("post", "/login/login-mpcode", { code: code }).then((res) => {
@@ -244,11 +242,11 @@ function weChatLogin(url) {
         localStorage.setItem("wxUser", JSON.stringify(res.data))
         localStorage.setItem("sfLogin", true)
       } else {
-        sessionStorage.setItem('openid',res.data.openid)
+        sessionStorage.setItem("openid", res.data.openid)
         window.location.href = "login.html"
       }
     })
   } else {
-    openAuthorizePage(url)
+    openAuthorizePage(url, state)
   }
 }

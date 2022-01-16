@@ -64,35 +64,39 @@ function initOrgPage(data) {
 function yunyangClick() {
   console.log("云养点击事件sfLogin", sfLogin)
 
-  if (!sfLogin) {
-    weChatLogin("login.html")
+  if (sfLogin) {
+    weChatLogin("xiaoyuanxq.html", id)
     // window.location.href = "login.html"
   } else {
-    $.alert("此功能暂未开放")
-  }
-
-  return
-  let params = {
-    org_id: id,
-    type: 1,
-    user_id: userId,
-  }
-  getApi("post", "/ca-pet/adopt", params).then((res) => {
-    console.log("res", res)
-    let data = res.data
-    if (data) {
-      payPet(data.order_no)
+    // $.alert("此功能暂未开放")
+    //这个接口，在小院详情点云养一只时候，传type=1,传orgid，另外两个可以不传
+    // 点指定云养的时候，type=5，petid,num=5
+    let params = {
+      org_id: id,
+      type: 1,
+      user_id: userId,
+      num: "",
+      pet_id: "",
     }
-  })
+    getApi("post", "/ca-pet/adopt", params).then((res) => {
+      console.log("res", res)
+      let data = res.data
+      if (data) {
+        console.log("开始支付")
+        payPet(data.order_no)
+      }
+    })
+  }
 }
 function payPet(order_no) {
   let param1 = {
     user_id: userId,
     order_no,
-    type: 2,
-    openid: wx.getStorageSync("openid"),
+    type: 1,
+    openid: openid,
   }
-  API("/ca-pet/pay-order", param1).then((res) => {
+  console.log("订单支付入参", param1)
+  getApi("post", "/ca-pet/pay-order", param1).then((res) => {
     // onBridgeReady()
   })
 }
