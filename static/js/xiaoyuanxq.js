@@ -1,5 +1,4 @@
-var id,
-  userId = 315
+var id
 $(function () {
   id = getUrlParam("id")
   console.log("id==", id)
@@ -64,8 +63,8 @@ function initOrgPage(data) {
 function yunyangClick() {
   console.log("云养点击事件sfLogin", sfLogin)
 
-  if (sfLogin) {
-    weChatLogin("xiaoyuanxq.html", id)
+  if (!sfLogin) {
+    weChatLogin("xiaoyuanxq.html?id=" + id)
     // window.location.href = "login.html"
   } else {
     // $.alert("此功能暂未开放")
@@ -87,16 +86,4 @@ function yunyangClick() {
       }
     })
   }
-}
-function payPet(order_no) {
-  let param1 = {
-    user_id: userId,
-    order_no,
-    type: 1,
-    openid: openid,
-  }
-  console.log("订单支付入参", param1)
-  getApi("post", "/ca-pet/pay-order", param1).then((res) => {
-    // onBridgeReady()
-  })
 }

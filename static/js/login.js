@@ -58,6 +58,7 @@ function loginSubmit() {
   getApi("post", "/login/phone", params).then((res) => {
     if (res.status) {
       sfLogin = true
+      localStorage.setItem("wxUser", JSON.stringify(res.data))
       localStorage.setItem("sfLogin", sfLogin)
       history.back(-1)
     } else {
