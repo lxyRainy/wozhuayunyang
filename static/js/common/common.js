@@ -6,12 +6,13 @@ var wxUser = localStorage.getItem("wxUser") // 微信用户信息
 var openid = sessionStorage.getItem("openid") || ""
 var userId = 315
 var code = sessionStorage.getItem("code") || ""
-console.log("sfLogin", sfLogin)
-console.log("openid", openid)
-console.log("wxUser", wxUser)
-console.log("userId", userId)
-console.log("code", code)
+
 $(function () {
+  console.log("sfLogin", sfLogin)
+  console.log("openid", openid)
+  console.log("wxUser", wxUser)
+  console.log("userId", userId)
+  console.log("code", code)
   hideHeader()
 })
 // 价格格式化
