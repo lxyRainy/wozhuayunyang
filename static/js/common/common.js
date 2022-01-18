@@ -5,9 +5,11 @@ var appid = "wxaadeae0c92ecddb3"
 var wxUser = localStorage.getItem("wxUser") // 微信用户信息
 var openid = sessionStorage.getItem("openid") || ""
 var userId = 315
-var code = sessionStorage.getItem("code") || ""
+var code
 
 $(function () {
+  code = getUrlCode()
+  alert("code===", code)
   console.log("sfLogin", sfLogin)
   console.log("openid", openid)
   console.log("wxUser", wxUser)
@@ -15,6 +17,32 @@ $(function () {
   console.log("code", code)
   hideHeader()
 })
+
+//转码
+function getUrlCode() {
+  var url = window.location.href
+  console.log("当前url===", url)
+  //如果有就直接截取code
+  if (url.indexOf("?") != -1) {
+    let obj = urlToObj(url)
+    console.log(code, obj.code)
+    return obj.code
+  } else {
+    return ""
+  }
+}
+
+function urlToObj(str) {
+  var obj = {}
+  var arr1 = str.split("?")
+  var arr2 = arr1[1].split("&")
+  for (var i = 0; i < arr2.length; i++) {
+    var res = arr2[i].split("=")
+    obj[res[0]] = res[1]
+  }
+  return obj
+}
+
 // 价格格式化
 function fmPrice(num) {
   return num.toFixed(2)
@@ -183,7 +211,7 @@ function debounce(fn, delay = 500) {
 // 打开验证页
 function openAuthorizePage(url, state) {
   let response_type = "code"
-  let scope = "snsapi_base" // ""//snsapi_userinfo
+  let scope = "snsapi_base" // ""//"snsapi_userinfo" //
   var router = encodeURIComponent("http://yunyangh5.wozhua.net/" + url)
   window.open(
     `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${router}&response_type=${response_type}&scope=${scope}&state=${
