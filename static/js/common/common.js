@@ -295,16 +295,16 @@ function onBridgeReady(data) {
     }
   )
 }
-// if (typeof WeixinJSBridge == "undefined") {
-//   if (document.addEventListener) {
-//     document.addEventListener("WeixinJSBridgeReady", onBridgeReady, false)
-//   } else if (document.attachEvent) {
-//     document.attachEvent("WeixinJSBridgeReady", onBridgeReady)
-//     document.attachEvent("onWeixinJSBridgeReady", onBridgeReady)
-//   }
-// } else {
-//   onBridgeReady()
-// }
+if (typeof WeixinJSBridge == "undefined") {
+  if (document.addEventListener) {
+    document.addEventListener("WeixinJSBridgeReady", onBridgeReady, false)
+  } else if (document.attachEvent) {
+    document.attachEvent("WeixinJSBridgeReady", onBridgeReady)
+    document.attachEvent("onWeixinJSBridgeReady", onBridgeReady)
+  }
+} else {
+  onBridgeReady()
+}
 
 // 查看订单支付结果
 function getPeyResult(order_no) {
