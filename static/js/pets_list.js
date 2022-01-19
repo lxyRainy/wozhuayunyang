@@ -3,15 +3,16 @@ $(function () {
   console.log("id==", id)
   getPets(id)
 })
-function getPets (id) {
+function getPets(id) {
   let param = {
     org_id: id,
     // status: 1,
   }
+  let html = ""
   getApi("post", "/ca-pet/list", param).then((res) => {
-    if (res.status && res.data && data.length) {
+    if (res.status && res.data && res.data.length) {
       let data = res.data
-      let html = ""
+
       data.map((item) => {
         // 状态 0全部 1未认养 2认养中
         let status = item.status
@@ -53,6 +54,6 @@ function getPets (id) {
     $("#petsList").html(html)
   })
 }
-function openPetDetail (id) {
+function openPetDetail(id) {
   window.location.href = "pet_detail.html?id=" + id
 }
