@@ -12,6 +12,8 @@ $(function () {
   code = getUrlCode()
   if (code) {
     sessionStorage.setItem('code', code)
+  } else {
+    openAuthorizePage(window.location.href)
   }
   userId = wxUser ? JSON.parse(wxUser).userid : '';
   // alert("code===", code)
@@ -286,7 +288,7 @@ function onBridgeReady (data) {
   WeixinJSBridge.invoke(
     "getBrandWCPayRequest",
     {
-      appId: data.timeStamp, //公众号ID，由商户传入appid, //
+      appId: data.appId, //公众号ID，由商户传入appid, //
       timeStamp: data.timeStamp, //时间戳，自1970年以来的秒数
       nonceStr: data.nonceStr, //随机串
       package: data.package,
