@@ -1,17 +1,20 @@
 var router = "https://adopt.wozhua.net"
 var key = "8da71946065811ec8e456c92bf623eda" //调接口用的
-localStorage.removeItem('sfLogin')
-var sfLogin = localStorage.getItem("sfLogin") || false // 是否登录
+// localStorage.removeItem('sfLogin')
+var sfLogin;// = localStorage.getItem("sfLogin") || false // 是否登录
 var appid = "wxaadeae0c92ecddb3"
 var wxUser = localStorage.getItem("wxUser") // 微信用户信息
-var openid = sessionStorage.getItem("openid") || "o4SX354GWnnvEIsA2nHWWBbK8PVw"
-var userId = 315
-var code
+var openid = sessionStorage.getItem("openid") || ""
+var userId = wxUser ? userId.userid : '';
+var code;
 
 $(function () {
   code = getUrlCode()
+  if (code) {
+    sessionStorage.setItem('code', code)
+  }
   // alert("code===", code)
-  console.log("sfLogin==", sfLogin)
+  // console.log("sfLogin==", sfLogin)
   console.log("openid==", openid)
   console.log("wxUser==", wxUser)
   console.log("userId==", userId)
@@ -226,7 +229,8 @@ function weChatLogin (url, state) {
       if (res.status) {
         // code 登录成功
         localStorage.setItem("wxUser", JSON.stringify(res.data))
-        localStorage.setItem("sfLogin", true)
+
+        // localStorage.setItem("sfLogin", true)
       } else {
         sessionStorage.setItem("openid", res.data.openid)
         window.location.href = "login.html"

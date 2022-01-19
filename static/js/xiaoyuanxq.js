@@ -61,9 +61,9 @@ function initOrgPage (data) {
 }
 // 云养点击事件
 function yunyangClick () {
-  console.log("云养点击事件sfLogin", sfLogin)
+  console.log("云养点击事件wxUser", wxUser)
 
-  if (!sfLogin) {
+  if (!wxUser) {
     weChatLogin("xiaoyuanxq.html?id=" + id)
   } else {
     // $.alert("此功能暂未开放")

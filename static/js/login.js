@@ -56,9 +56,9 @@ function loginSubmit () {
 
   getApi("post", "/login/phone", params).then((res) => {
     if (res.status) {
-      sfLogin = true
+      // sfLogin = true
       localStorage.setItem("wxUser", JSON.stringify(res.data))
-      localStorage.setItem("sfLogin", sfLogin)
+      // localStorage.setItem("sfLogin", sfLogin)
       history.back(-1)
     } else {
       $.alert(res.msg || "登录失败")
