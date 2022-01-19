@@ -9,9 +9,9 @@ function getPets (id) {
     // status: 1,
   }
   getApi("post", "/ca-pet/list", param).then((res) => {
-    let data = res.data
-    let html = ""
-    if (data && data.length) {
+    if (res.status && res.data && data.length) {
+      let data = res.data
+      let html = ""
       data.map((item) => {
         // 状态 0全部 1未认养 2认养中
         let status = item.status
