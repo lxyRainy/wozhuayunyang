@@ -146,6 +146,7 @@ function getApi(method, url, data) {
       },
       error: function () {
         $.hideLoading()
+        resolve(false)
         $.alert("网络错误")
       },
     })
@@ -245,8 +246,7 @@ function weChatLogin(url, state) {
   }
 }
 // 订单支付
-function payPet(order_no,url) {
-  openAuthorizePage(url) 
+function payPet(order_no, url) {
   getApi("post", "/login/get-mp-openid", { code: code }).then((res) => {
     if (res.status) {
       openid = res.data.openid
@@ -259,10 +259,9 @@ function payPet(order_no,url) {
       console.log("订单支付入参", param1)
       getApi("post", "/ca-pet/pay-order", param1).then((res) => {
         if (res.status) {
-          // onBridgeReady()
           // 调微信的支付
           const data = res.data
-          onBridgeReady(data)
+          onBridgeReady(data, order_no)
 
           // if (typeof WeixinJSBridge == "undefined") {
           //   if (document.addEventListener) {
@@ -278,11 +277,13 @@ function payPet(order_no,url) {
           $.alert(res.msg || "查询失败")
         }
       })
+    } else {
+      openAuthorizePage(url)
     }
   })
 }
 
-function onBridgeReady(data) {
+function onBridgeReady(data, order_no) {
   WeixinJSBridge.invoke(
     "getBrandWCPayRequest",
     {
@@ -313,6 +314,11 @@ function getPeyResult(order_no) {
   }
   getApi("post", "/ca-pet/get-order", param).then((res) => {
     // onBridgeReady()
-    $.alert(res.msg)
+    $.alert(
+      "恭喜你云养成功，您可以去小程序-“我的云养”查看云养的宠物",
+      function () {
+        //点击确认后的回调函数
+      }
+    )
   })
 }
