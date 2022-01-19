@@ -1,4 +1,4 @@
-var id
+var id;
 $(function () {
   id = getUrlParam("id")
   console.log("id==", id)
@@ -62,7 +62,6 @@ function initOrgPage (data) {
 // 云养点击事件
 function yunyangClick () {
   console.log("云养点击事件wxUser", wxUser)
-
   if (!wxUser) {
     weChatLogin("xiaoyuanxq.html?id=" + id)
   } else {

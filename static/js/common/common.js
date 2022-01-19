@@ -3,9 +3,9 @@ var key = "8da71946065811ec8e456c92bf623eda" //调接口用的
 // localStorage.removeItem('sfLogin')
 var sfLogin;// = localStorage.getItem("sfLogin") || false // 是否登录
 var appid = "wxaadeae0c92ecddb3"
-var wxUser = localStorage.getItem("wxUser") // 微信用户信息
+var wxUser = localStorage.getItem("wxUser") //|| '{ "userid": 32227, "nickname": "蜜城", "username": "7c72f7e8a18d38c7a5264503a95dc6d5", "phone": "15227132129", "avatar": "http://wozhuaapi.newpi.net/images/avatar_1.png", "gender": 1, "identity": 1, "wechat_openid": "o4SX354GWnnvEIsA2nHWWBbK8PVw" }'// 微信用户信息
 var openid = sessionStorage.getItem("openid") || ""
-var userId = wxUser ? userId.userid : '';
+var userId;// = wxUser ? wxUser.userid : '';
 var code;
 
 $(function () {
@@ -13,6 +13,7 @@ $(function () {
   if (code) {
     sessionStorage.setItem('code', code)
   }
+  userId = wxUser ? JSON.parse(wxUser).userid : '';
   // alert("code===", code)
   // console.log("sfLogin==", sfLogin)
   console.log("openid==", openid)
@@ -109,7 +110,7 @@ function formatTime (time) {
  * @returns
  */
 function getApi (method, url, data) {
-  console.log("data===", data)
+  console.log("入参data===", data)
   return new Promise(function (resolve, reject) {
     let timestamp = new Date().getTime().toString().substr(0, 10)
     // let url = "/ca-caring-organization/list"
