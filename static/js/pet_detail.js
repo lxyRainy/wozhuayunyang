@@ -4,8 +4,12 @@ $(function () {
   console.log("id==", pet_id)
 
   getPetDetail()
+  state = getUrlCode('state')
+  if (state == '1') {// 直接调云养的接口
+    yunyangClick()
+  }
 })
-function getPetDetail() {
+function getPetDetail () {
   let param = {
     pet_id: pet_id,
   }
@@ -20,7 +24,7 @@ function getPetDetail() {
     }
   })
 }
-function showPetPge(data) {
+function showPetPge (data) {
   // 顶部图
   $("#topImg").attr("src", data.avatar)
   $("#petNo").html("编号：" + data.pet_no)
@@ -36,7 +40,7 @@ function showPetPge(data) {
   $("#yunyang_price").html("￥" + fmPrice(data.renew_price / 20) + "（5周）")
   showVideos(data.files)
 }
-async function showVideos(files) {
+async function showVideos (files) {
   let html = ""
   const len = files.length
   if (files && len) {
@@ -54,10 +58,9 @@ async function showVideos(files) {
     html += `
     <div class="video_item">
       <div class="pet_video"  style="filter:contrast(5%) blur(5px);background:black;height:100vw"></div>
-      ${
-        len > 1
-          ? `<p class="unlock_video">云养成功后解锁剩余${len - 1}个视频</p>`
-          : ""
+      ${len > 1
+        ? `<p class="unlock_video">云养成功后解锁剩余${len - 1}个视频</p>`
+        : ""
       } 
     </div>      
     `
@@ -84,7 +87,7 @@ async function showVideos(files) {
 }
 
 // 获取视频基本信息
-function getVideoBasicInfo(videoSrc) {
+function getVideoBasicInfo (videoSrc) {
   return new Promise((resolve, reject) => {
     const video = document.createElement("video")
     video.src = videoSrc
@@ -109,7 +112,7 @@ function getVideoBasicInfo(videoSrc) {
   })
 }
 // 获取视频基本信息
-function getVideoBasicInfo(videoSrc) {
+function getVideoBasicInfo (videoSrc) {
   return new Promise((resolve, reject) => {
     const video = document.createElement("video")
     video.src = videoSrc
@@ -135,7 +138,7 @@ function getVideoBasicInfo(videoSrc) {
 }
 
 // 将获取到的视频信息，转化为图片地址
-function getVideoPosterInfo(videoInfo) {
+function getVideoPosterInfo (videoInfo) {
   return new Promise((resolve) => {
     const { video, width, height } = videoInfo
     video.addEventListener("canplay", () => {
@@ -151,7 +154,7 @@ function getVideoPosterInfo(videoInfo) {
   })
 }
 // 获取一个图片的平均饱和度
-function getImageSaturation(canvas) {
+function getImageSaturation (canvas) {
   const ctx = canvas.getContext("2d")
   const uint8ClampedArray = ctx.getImageData(
     0,
@@ -169,7 +172,7 @@ function getImageSaturation(canvas) {
   return avarageSaturation
 }
 
-function rgb2hsl(r, g, b) {
+function rgb2hsl (r, g, b) {
   r = r / 255
   g = g / 255
   b = b / 255
@@ -202,7 +205,7 @@ function rgb2hsl(r, g, b) {
   return { h, s, l }
 }
 
-function binary2rgba(uint8ClampedArray) {
+function binary2rgba (uint8ClampedArray) {
   const rgbaList = []
   for (let i = 0; i < uint8ClampedArray.length; i++) {
     if (i % 4 === 0) {
@@ -227,7 +230,7 @@ function binary2rgba(uint8ClampedArray) {
 }
 
 // 根据视频地址与播放时长获取图片信息与图片平均饱和度
-function getVideoPosterByFrame(videoSrc, targetTime) {
+function getVideoPosterByFrame (videoSrc, targetTime) {
   return getVideoBasicInfo(videoSrc).then((videoInfo) => {
     const { video, duration } = videoInfo
     video.currentTime = targetTime
@@ -235,7 +238,7 @@ function getVideoPosterByFrame(videoSrc, targetTime) {
   })
 }
 
-async function getBestPoster(videoSrc, targetSaturation) {
+async function getBestPoster (videoSrc, targetSaturation) {
   const videoInfo = await getVideoBasicInfo(videoSrc)
   const { duration } = videoInfo
   for (let i = 0; i <= duration; i++) {
@@ -248,7 +251,7 @@ async function getBestPoster(videoSrc, targetSaturation) {
   }
 }
 
-function yunyangClick() {
+function yunyangClick () {
   if (!wxUser) {
     weChatLogin("pet_detail.html?id=" + pet_id)
   } else {
