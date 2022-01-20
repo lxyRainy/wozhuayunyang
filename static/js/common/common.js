@@ -10,9 +10,9 @@ var code = sessionStorage.getItem("code")
 var state = ""
 
 $(function () {
-  code = getUrlCode("code")
-  if (code) {
-    sessionStorage.setItem("code", code)
+  let code1 = getUrlCode("code")
+  if (code1) {
+    sessionStorage.setItem("code", code1)
   }
   userId = wxUser ? JSON.parse(wxUser).userid : ""
   // alert("code===", code)
