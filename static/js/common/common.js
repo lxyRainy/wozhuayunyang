@@ -217,7 +217,12 @@ function debounce (fn, delay = 500) {
     }, delay)
   }
 }
-// 打开验证页
+
+/**
+ * 打开验证页
+ * @param {*} url 回调页面的路径
+ * @param {*} state 携带的参数。自己规定 传 '1' 则立即执行支付的方法
+ */
 function openAuthorizePage (url, state) {
   console.log("进入验证页", url)
   let response_type = "code"
@@ -263,6 +268,7 @@ function payPet (order_no, url) {
         if (res.status) {
           // 调微信的支付
           const data = res.data
+          sessionStorage.setItem('signPackage', JSON.stringify(data))
           onBridgeReady(data, order_no)
 
           // if (typeof WeixinJSBridge == "undefined") {
@@ -326,6 +332,7 @@ function getPeyResult (order_no) {
       "恭喜你云养成功，您可以去小程序-“我的云养”查看云养的宠物",
       function () {
         //点击确认后的回调函数
+        window.location.href = 'jump_miniprm.html'
       }
     )
   })
