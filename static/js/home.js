@@ -10,6 +10,7 @@ $(function () {
   getHomeCx()
   // inputkeyup事件
   xyncChange()
+  openAuthorizePage(url, '1')
 })
 
 function getHomeCx () {

@@ -328,12 +328,18 @@ function getPeyResult (order_no) {
   }
   getApi("post", "/ca-pet/get-order", param).then((res) => {
     // onBridgeReady()
-    $.alert(
-      "恭喜你云养成功，您可以去小程序-“我的云养”查看云养的宠物",
-      function () {
+
+    //如果参数过多，建议通过 object 方式传入
+    $.confirm({
+      title: '提示',
+      text: '恭喜您云养成功，您可以去小程序-“我的云养”查看云养的宠物',
+      onOK: function () {
+        //点击确认
         //点击确认后的回调函数
-        window.location.href = 'jump_miniprm.html'
+        window.location.href = 'jump_mp.html'
+      },
+      onCancel: function () {
       }
-    )
+    });
   })
 }
