@@ -4,7 +4,7 @@ var key = "8da71946065811ec8e456c92bf623eda" //调接口用的
 var sfLogin // = localStorage.getItem("sfLogin") || false // 是否登录
 var appid = "wxaadeae0c92ecddb3"
 var wxUser = localStorage.getItem("wxUser") //|| '{ "userid": 32227, "nickname": "蜜城", "username": "7c72f7e8a18d38c7a5264503a95dc6d5", "phone": "15227132129", "avatar": "http://wozhuaapi.newpi.net/images/avatar_1.png", "gender": 1, "identity": 1, "wechat_openid": "o4SX354GWnnvEIsA2nHWWBbK8PVw" }'// 微信用户信息
-var openid = sessionStorage.getItem("openid") || ""
+var openid = localStorage.getItem("openid") || ""
 var userId // = wxUser ? wxUser.userid : '';
 var code = sessionStorage.getItem("code")
 var state = ""
@@ -22,6 +22,7 @@ $(function () {
   console.log("userId==", userId)
   console.log("code==", code)
   hideHeader()
+  // initShare()
 })
 
 //转码
@@ -241,10 +242,9 @@ function weChatLogin (url, state) {
       if (res.status) {
         // code 登录成功
         localStorage.setItem("wxUser", JSON.stringify(res.data))
-
-        // localStorage.setItem("sfLogin", true)
+        localStorage.setItem("openid", res.data.wechat_openid)
       } else {
-        sessionStorage.setItem("openid", res.data.openid)
+        localStorage.setItem("openid", res.data.openid)
         window.location.href = "login.html"
       }
     })
@@ -254,42 +254,42 @@ function weChatLogin (url, state) {
 }
 // 订单支付
 function payPet (order_no, url) {
-  getApi("post", "/login/get-mp-openid", { code: code }).then((res) => {
+  // getApi("post", "/login/get-mp-openid", { code: code }).then((res) => {
+  // if (res.status) {
+  // openid = res.data.openid
+  let param1 = {
+    user_id: userId,
+    order_no,
+    type: 3, //类型 1-APP 2-小程序 3-公众号JSAPI 不传默认app
+    openid: openid,
+  }
+  console.log("订单支付入参", param1)
+  getApi("post", "/ca-pet/pay-order", param1).then((res) => {
     if (res.status) {
-      openid = res.data.openid
-      let param1 = {
-        user_id: userId,
-        order_no,
-        type: 3, //类型 1-APP 2-小程序 3-公众号JSAPI 不传默认app
-        openid: openid,
-      }
-      console.log("订单支付入参", param1)
-      getApi("post", "/ca-pet/pay-order", param1).then((res) => {
-        if (res.status) {
-          // 调微信的支付
-          const data = res.data
-          sessionStorage.setItem("signPackage", JSON.stringify(data))
-          onBridgeReady(data, order_no)
+      // 调微信的支付
+      const data = res.data
+      sessionStorage.setItem("signPackage", JSON.stringify(data))
+      onBridgeReady(data, order_no)
 
-          // if (typeof WeixinJSBridge == "undefined") {
-          //   if (document.addEventListener) {
-          //     document.addEventListener("WeixinJSBridgeReady", onBridgeReady, false)
-          //   } else if (document.attachEvent) {
-          //     document.attachEvent("WeixinJSBridgeReady", onBridgeReady)
-          //     document.attachEvent("onWeixinJSBridgeReady", onBridgeReady)
-          //   }
-          // } else {
-          //   onBridgeReady()
-          // }
-        } else {
-          $.alert(res.msg || "查询失败")
-        }
-      })
+      // if (typeof WeixinJSBridge == "undefined") {
+      //   if (document.addEventListener) {
+      //     document.addEventListener("WeixinJSBridgeReady", onBridgeReady, false)
+      //   } else if (document.attachEvent) {
+      //     document.attachEvent("WeixinJSBridgeReady", onBridgeReady)
+      //     document.attachEvent("onWeixinJSBridgeReady", onBridgeReady)
+      //   }
+      // } else {
+      //   onBridgeReady()
+      // }
     } else {
-      sessionStorage.setItem('sfpay', '1')// 调了页面回调后就支付
-      openAuthorizePage(url, "1")
+      $.alert(res.msg || "查询失败")
     }
   })
+  // } else {
+  //   sessionStorage.setItem('sfpay', '1')// 调了页面回调后就支付
+  //   openAuthorizePage(url, "1")
+  // }
+  // })
 }
 
 function onBridgeReady (data, order_no) {
@@ -346,4 +346,21 @@ function getPeyResult (order_no) {
       onCancel: function () { },
     })
   })
+}
+function initShare () {
+  console.log('进入分享功能')
+  if (is_weixn()) {
+    wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
+      wx.updateAppMessageShareData({
+        title: '握爪云养', // 分享标题
+        desc: '这是描述', // 分享描述
+        link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        imgUrl: '', // 分享图标
+        success: function () {
+          // 设置成功
+        }
+      })
+    });
+  }
+
 }
