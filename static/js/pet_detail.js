@@ -254,29 +254,33 @@ async function getBestPoster (videoSrc, targetSaturation) {
 }
 
 function yunyangClick () {
-  if (!wxUser || !openid) {
-    weChatLogin("pet_detail.html?id=" + pet_id)
-  } else {
-    // $.alert('此功能暂未开放')
-    //这个接口，在小院详情点云养一只时候，传type=1,传orgid，另外两个可以不传
-    // 点指定云养的时候，type=5，petid,num=5
-    let params = {
-      org_id: org_id,
-      type: 5,
-      user_id: userId,
-      num: 5,
-      pet_id: pet_id,
-    }
-    console.log("支付接口", params)
-    getApi("post", "/ca-pet/adopt", params).then((res) => {
-      console.log("res", res)
-      if (res.status && res.data) {
-        let data = res.data
-        console.log("开始支付")
-        payPet(data.order_no, "pet_detail.html?id=" + pet_id)
-      } else {
-        $.alert(res.msg || "操作失败")
-      }
-    })
+  let params = {
+    org_id: org_id,
+    type: 5,
+    user_id: userId,
+    num: 5,
+    pet_id: pet_id,
   }
+  const page = "pet_detail.html?id=" + pet_id
+  commonAdoptClick(params, page, '1')
+
+  // if (!wxUser || !openid) {
+  //   weChatLogin("pet_detail.html?id=" + pet_id, '1', params)
+  // } else {
+  //   makeAdot(params, "pet_detail.html?id=" + pet_id)
+  // $.alert('此功能暂未开放')
+  //这个接口，在小院详情点云养一只时候，传type=1,传orgid，另外两个可以不传
+  // 点指定云养的时候，type=5，petid,num=5
+  // console.log("支付接口", params)
+  // getApi("post", "/ca-pet/adopt", params).then((res) => {
+  //   console.log("res", res)
+  //   if (res.status && res.data) {
+  //     let data = res.data
+  //     console.log("开始支付")
+  //     payPet(data.order_no, "pet_detail.html?id=" + pet_id)
+  //   } else {
+  //     $.alert(res.msg || "操作失败")
+  //   }
+  // })
+  // }
 }

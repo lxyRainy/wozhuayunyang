@@ -235,23 +235,49 @@ function openAuthorizePage (url, state) {
   // window.open(jumpPath)
   window.location.href = jumpPath
 }
-
+/**
+ * 公共云养点击事件
+ * @param {*} page 当前页面url
+ * @param {*} params 调支付接口需传参
+ * @param {*} state 回调页面里的参数。自行判断 '1'的时候直接去调支付的接口
+ */
+function commonAdoptClick (page, params, state) {
+  if (!wxUser || !openid) {
+    weChatLogin(page, params, state)
+  } else {
+    makeAdot(params, page)
+  }
+}
 // 微信公众号登录
-function weChatLogin (url, state) {
+function weChatLogin (page, params, state) {
   if (code) {
     getApi("post", "/login/login-mpcode", { code: code }).then((res) => {
       if (res.status) {
         // code 登录成功
         localStorage.setItem("wxUser", JSON.stringify(res.data))
         localStorage.setItem("openid", res.data.wechat_openid)
+        makeAdot(params, page)
       } else {
         localStorage.setItem("openid", res.data.openid)
         window.location.href = "login.html"
       }
     })
   } else {
-    openAuthorizePage(url, state)
+    openAuthorizePage(page, state)
   }
+}
+// 生成云养订单
+function makeAdot (params, page) {
+  getApi("post", "/ca-pet/adopt", params).then((res) => {
+    console.log("res", res)
+    if (res.status && res.data) {
+      let data = res.data
+      console.log("开始支付")
+      payPet(data.order_no, page)
+    } else {
+      $.alert(res.msg || "操作失败")
+    }
+  })
 }
 // 订单支付
 function payPet (order_no, url) {

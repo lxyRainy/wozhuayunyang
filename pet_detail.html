@@ -1,88 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="static/components/weui/jquery-weui.css" />
-    <link rel="stylesheet" href="static/components/weui/weui.css" />
-    <link rel="stylesheet" href="static/css/common.css" />
-    <link rel="stylesheet" href="static/css/xiaoyuanxq.css" />
-    <link rel="stylesheet" href="static/css/pet_detail.css" />
-    <title>宠物详情</title>
-  </head>
 
-  <body>
-    <div class="arrow_header">
-      <a href="javascript:history.back(-1)"></a>
-    </div>
-    <div id="petDetail">
-      <section class="xiaoyuan_top hide_header">
-        <div class="xiaoyuan_gift">
-          <img src="" alt="" id="topImg" />
-        </div>
-        <div class="xiaoyuan_top_item">
-          <div class="xiaoyuan_price">
-            <b id="" class="pet_price pet_name">昵称</b>
-            <!-- <span>查看小院动态</span> -->
-          </div>
-          <div class="xiaoyuan_name">
-            <p class="orgName" id="petNo">编号</p>
-          </div>
-        </div>
-      </section>
-      <section class="xiaoyuan_infomation">
-        <div class="card" id="pet_intro"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="static/components/weui/jquery-weui.css" />
+  <link rel="stylesheet" href="static/components/weui/weui.css" />
+  <link rel="stylesheet" href="static/css/common.css" />
+  <link rel="stylesheet" href="static/css/xiaoyuanxq.css" />
+  <link rel="stylesheet" href="static/css/pet_detail.css" />
+  <title>宠物详情</title>
+</head>
 
-        <div class="card pet_notice">
-          <img src="static/images/xiaoyuanxq/laba.svg" alt="" />
-          <div>
-            指定云养5周起养，云养后可以按周延长云养时间。如不满意本次云养，也可以随时终止云养,平台将退未到期的云养款给你。
-          </div>
+<body>
+  <div class="arrow_header">
+    <a href="javascript:history.back(-1)"></a>
+  </div>
+  <div id="petDetail">
+    <section class="xiaoyuan_top hide_header">
+      <div class="xiaoyuan_gift">
+        <img src="" alt="" id="topImg" />
+      </div>
+      <div class="xiaoyuan_top_item">
+        <div class="xiaoyuan_price">
+          <b id="" class="pet_price pet_name">昵称</b>
+          <!-- <span>查看小院动态</span> -->
         </div>
-        <div class="card" id="org_msg">
-          <p>机构信息</p>
-          <div class="org_address"></div>
-          <div class="org_phone">领养办理：联系客服</div>
-          <div class="orgName" id="jgName"></div>
+        <div class="xiaoyuan_name">
+          <p class="orgName" id="petNo">编号</p>
         </div>
+      </div>
+    </section>
+    <section class="xiaoyuan_infomation">
+      <div class="card" id="pet_intro"></div>
 
-        <div class="card">
-          对这只你一直在云养的宠物，你有对它的优先领养权，如愿意给它一个幸福温暖的家，请及时联络平台客服，向小院申请真实领养。
+      <div class="card pet_notice">
+        <img src="static/images/xiaoyuanxq/laba.svg" alt="" />
+        <div>
+          指定云养5周起养，云养后可以按周延长云养时间。如不满意本次云养，也可以随时终止云养,平台将退未到期的云养款给你。
         </div>
-        <div class="card" id="pet_dynamic">
-          <div style="font-weight: 600">动态反馈</div>
-          <p>你可以每周至少1次在这里看到TA的视频动态</p>
-          <div id="pet_movies"></div>
-        </div>
-      </section>
-      <footer>
-        <div class="pay_block">
-          <span id="yunyang_price" class="pet_price">￥0.00</span>
-          <button onclick="yunyangClick()">指定云养</button>
-        </div>
-      </footer>
-    </div>
-    <footer></footer>
-    <section class="xiaoyuan_bottom"></section>
-    <script type="text/javascript" src="static/js/common/md5.js"></script>
-    <script
-      type="text/javascript"
-      src="static/js/common/jquery-3.4.1.min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="static/components/weui/jquery-weui.min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="static/components/weui/weui.min.js"
-    ></script>
-    <script type="text/javascript" src="static/js/common/common.js"></script>
-    <script type="text/javascript" src="static/js/pet_detail.js"></script>
-    <script
-      type="text/javascript"
-      src="static/js/common/vconsole.min.js"
-    ></script>
-  </body>
+      </div>
+      <div class="card" id="org_msg">
+        <p>机构信息</p>
+        <div class="org_address"></div>
+        <div class="org_phone">领养办理：联系客服</div>
+        <div class="orgName" id="jgName"></div>
+      </div>
+
+      <div class="card">
+        对这只你一直在云养的宠物，你有对它的优先领养权，如愿意给它一个幸福温暖的家，请及时联络平台客服，向小院申请真实领养。
+      </div>
+      <div class="card" id="pet_dynamic">
+        <div style="font-weight: 600">动态反馈</div>
+        <p>你可以每周至少1次在这里看到TA的视频动态</p>
+        <div id="pet_movies"></div>
+      </div>
+    </section>
+    <footer>
+      <div class="pay_block">
+        <span id="yunyang_price" class="pet_price">￥0.00</span>
+        <button onclick="yunyangClick()">指定云养</button>
+      </div>
+    </footer>
+  </div>
+  <footer></footer>
+  <section class="xiaoyuan_bottom"></section>
+  <script type="text/javascript" src="static/js/common/md5.js"></script>
+  <script type="text/javascript" src="static/js/common/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="static/components/weui/jquery-weui.min.js"></script>
+  <script type="text/javascript" src="static/components/weui/weui.min.js"></script>
+  <script type="text/javascript" src="static/js/common/common.js"></script>
+  <script type="text/javascript" src="static/js/pet_detail.js"></script>
+  <script type="text/javascript" src="static/js/common/vconsole.min.js"></script>
+  <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+</body>
+
 </html>

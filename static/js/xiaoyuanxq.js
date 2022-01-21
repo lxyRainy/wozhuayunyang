@@ -68,28 +68,37 @@ function initOrgPage (data) {
 // 云养点击事件
 function yunyangClick () {
   console.log("云养点击事件wxUser", wxUser)
-  if (!wxUser || !openid) {
-    weChatLogin("xiaoyuanxq.html?id=" + id, '1')
-  } else {
-    // $.alert("此功能暂未开放")
-    //这个接口，在小院详情点云养一只时候，传type=1,传orgid，另外两个可以不传
-    // 点指定云养的时候，type=5，petid,num=5
-    let params = {
-      org_id: id,
-      type: 1,
-      user_id: userId,
-      num: "",
-      pet_id: "",
-    }
-    getApi("post", "/ca-pet/adopt", params).then((res) => {
-      console.log("res", res)
-      if (res.status && res.data) {
-        let data = res.data
-        console.log("开始支付")
-        payPet(data.order_no, "xiaoyuanxq.html?id=" + id)
-      } else {
-        $.alert(res.msg || "操作失败")
-      }
-    })
+  let params = {
+    org_id: id,
+    type: 1,
+    user_id: userId,
+    num: "",
+    pet_id: "",
   }
+  const page = "xiaoyuanxq.html?id=" + id
+  commonAdoptClick(params, page, '1')
+  // if (!wxUser || !openid) {
+  //   weChatLogin("xiaoyuanxq.html?id=" + id, '1')
+  // } else {
+  //   // $.alert("此功能暂未开放")
+  //   //这个接口，在小院详情点云养一只时候，传type=1,传orgid，另外两个可以不传
+  //   // 点指定云养的时候，type=5，petid,num=5
+  //   let params = {
+  //     org_id: id,
+  //     type: 1,
+  //     user_id: userId,
+  //     num: "",
+  //     pet_id: "",
+  //   }
+  //   getApi("post", "/ca-pet/adopt", params).then((res) => {
+  //     console.log("res", res)
+  //     if (res.status && res.data) {
+  //       let data = res.data
+  //       console.log("开始支付")
+  //       payPet(data.order_no, "xiaoyuanxq.html?id=" + id)
+  //     } else {
+  //       $.alert(res.msg || "操作失败")
+  //     }
+  //   })
+  // }
 }
