@@ -4,8 +4,10 @@ $(function () {
   console.log("id==", id)
   getOrgInfo(id)
   wechatInit()
+  let sfpay = sessionStorage.getItem('sfpay')
   state = getUrlCode('state')
-  if (state == '1') {// 直接调云养的接口
+  if (state == '1' && sfpay == '1') {// 直接调云养的接口
+    sessionStorage.remove('sfpay')// 此页面调用过一次支付以后就不要直接再调了
     yunyangClick()
   }
 })

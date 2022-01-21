@@ -4,8 +4,10 @@ $(function () {
   console.log("id==", pet_id)
 
   getPetDetail()
+  let sfpay = sessionStorage.getItem('sfpay')
   state = getUrlCode('state')
-  if (state == '1') {// 直接调云养的接口
+  if (state == '1' && sfpay == '1') {// 直接调云养的接口
+    sessionStorage.remove('sfpay')// 是否现在支付
     yunyangClick()
   }
 })

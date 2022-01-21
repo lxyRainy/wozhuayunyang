@@ -25,7 +25,7 @@ $(function () {
 })
 
 //转码
-function getUrlCode(key) {
+function getUrlCode (key) {
   let url = window.location.href
   console.log("当前url===", url)
   //如果有就直接截取code
@@ -39,7 +39,7 @@ function getUrlCode(key) {
   return ""
 }
 
-function urlToObj(str) {
+function urlToObj (str) {
   var obj = {}
   var arr1 = str.split("?")
   var arr2 = arr1[1].split("&")
@@ -51,7 +51,7 @@ function urlToObj(str) {
 }
 
 // 价格格式化
-function fmPrice(num) {
+function fmPrice (num) {
   return num.toFixed(2)
 }
 // 日期格式化
@@ -80,12 +80,12 @@ Date.prototype.format = function (format) {
   }
   return format
 }
-function formatNumber(n) {
+function formatNumber (n) {
   n = n.toString()
   return n[1] ? n : "0" + n
 }
 // 将时间戳（秒）转换为时间
-function formatTime(time) {
+function formatTime (time) {
   let date = new Date(time * 1000)
   var year = date.getFullYear()
   var month = date.getMonth() + 1
@@ -111,7 +111,7 @@ function formatTime(time) {
  * @param {*} data 传参
  * @returns
  */
-function getApi(method, url, data) {
+function getApi (method, url, data) {
   console.log("入参data===", data)
   return new Promise(function (resolve, reject) {
     let timestamp = new Date().getTime().toString().substr(0, 10)
@@ -155,7 +155,7 @@ function getApi(method, url, data) {
   })
 }
 // 获取路径中的参数
-function getUrlParam(name) {
+function getUrlParam (name) {
   var result = window.location.search.match(
     new RegExp("[?&]" + name + "=([^&]+)", "i")
   )
@@ -165,7 +165,7 @@ function getUrlParam(name) {
   return result[1]
 }
 // 将所有空格替换为换行符
-function toBr(string) {
+function toBr (string) {
   //替换所有的换行符
   string = string.replace(/\r\n/g, "<br>")
   string = string.replace(/\n/g, "<br>")
@@ -175,7 +175,7 @@ function toBr(string) {
   return string
 }
 // 根据是否是微信浏览器判断header隐藏
-function hideHeader() {
+function hideHeader () {
   if (is_weixn()) {
     $(".arrow_header").hide()
     $(".hide_header").css("padding-top", 0)
@@ -185,7 +185,7 @@ function hideHeader() {
   }
 }
 // 判断是否是微信浏览器
-function is_weixn() {
+function is_weixn () {
   var ua = navigator.userAgent.toLowerCase()
   if (ua.match(/MicroMessenger/i) == "micromessenger") {
     console.log("微信浏览器")
@@ -201,7 +201,7 @@ function is_weixn() {
  * @param fn 事件触发的回调函数
  * @param delay 延迟时间
  */
-function debounce(fn, delay = 500) {
+function debounce (fn, delay = 500) {
   let timer = null
 
   return function () {
@@ -222,7 +222,7 @@ function debounce(fn, delay = 500) {
  * @param {*} url 回调页面的路径
  * @param {*} state 携带的参数。自己规定 传 '1' 则立即执行支付的方法
  */
-function openAuthorizePage(url, state) {
+function openAuthorizePage (url, state) {
   console.log("进入验证页", url, state)
   let response_type = "code"
   state = state || "STATE"
@@ -235,7 +235,7 @@ function openAuthorizePage(url, state) {
 }
 
 // 微信公众号登录
-function weChatLogin(url, state) {
+function weChatLogin (url, state) {
   if (code) {
     getApi("post", "/login/login-mpcode", { code: code }).then((res) => {
       if (res.status) {
@@ -253,7 +253,7 @@ function weChatLogin(url, state) {
   }
 }
 // 订单支付
-function payPet(order_no, url) {
+function payPet (order_no, url) {
   getApi("post", "/login/get-mp-openid", { code: code }).then((res) => {
     if (res.status) {
       openid = res.data.openid
@@ -286,12 +286,13 @@ function payPet(order_no, url) {
         }
       })
     } else {
+      sessionStorage.setItem('sfpay', '1')// 调了页面回调后就支付
       openAuthorizePage(url, "1")
     }
   })
 }
 
-function onBridgeReady(data, order_no) {
+function onBridgeReady (data, order_no) {
   WeixinJSBridge.invoke(
     "getBrandWCPayRequest",
     {
@@ -307,12 +308,16 @@ function onBridgeReady(data, order_no) {
         // 使用以上方式判断前端返回,微信团队郑重提示：
         //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
         // setTimeout(getPeyResult(order_no), 3000)
-        $.alert(
-          "恭喜你云养成功，您可以去小程序-“我的云养”查看云养的宠物",
-          function () {
+        $.confirm({
+          title: "提示",
+          text: "恭喜您云养成功，您可以去小程序-“我的云养”查看云养的宠物",
+          onOK: function () {
+            //点击确认
             //点击确认后的回调函数
-          }
-        )
+            window.location.href = "jump_mp.html"
+          },
+          onCancel: function () { },
+        })
       } else {
         $.alert("支付失败")
       }
@@ -321,7 +326,7 @@ function onBridgeReady(data, order_no) {
 }
 
 // 查看订单支付结果
-function getPeyResult(order_no) {
+function getPeyResult (order_no) {
   let param = {
     user_id: userId,
     order_no,
@@ -338,7 +343,7 @@ function getPeyResult(order_no) {
         //点击确认后的回调函数
         window.location.href = "jump_mp.html"
       },
-      onCancel: function () {},
+      onCancel: function () { },
     })
   })
 }
