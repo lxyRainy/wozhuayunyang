@@ -69,7 +69,7 @@ function initOrgPage (data) {
 function yunyangClick () {
   console.log("云养点击事件wxUser", wxUser)
   if (!wxUser || !openid) {
-    weChatLogin("xiaoyuanxq.html?id=" + id)
+    weChatLogin("xiaoyuanxq.html?id=" + id, '1')
   } else {
     // $.alert("此功能暂未开放")
     //这个接口，在小院详情点云养一只时候，传type=1,传orgid，另外两个可以不传
