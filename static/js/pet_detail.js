@@ -254,7 +254,7 @@ async function getBestPoster (videoSrc, targetSaturation) {
 }
 
 function yunyangClick () {
-  if (!wxUser) {
+  if (!wxUser || !openid) {
     weChatLogin("pet_detail.html?id=" + pet_id)
   } else {
     // $.alert('此功能暂未开放')
