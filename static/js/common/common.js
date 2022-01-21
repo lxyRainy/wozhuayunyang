@@ -3,8 +3,8 @@ var key = "8da71946065811ec8e456c92bf623eda" //调接口用的
 // sessionStorage.removeItem('sfLogin')
 var sfLogin // = sessionStorage.getItem("sfLogin") || false // 是否登录
 var appid = "wxaadeae0c92ecddb3"
-var wxUser = sessionStorage.getItem("wxUser") //|| '{ "userid": 32227, "nickname": "蜜城", "username": "7c72f7e8a18d38c7a5264503a95dc6d5", "phone": "15227132129", "avatar": "http://wozhuaapi.newpi.net/images/avatar_1.png", "gender": 1, "identity": 1, "wechat_openid": "o4SX354GWnnvEIsA2nHWWBbK8PVw" }'// 微信用户信息
-var openid = sessionStorage.getItem("openid") || ""
+var wxUser = localStorage.getItem("wxUser") //|| '{ "userid": 32227, "nickname": "蜜城", "username": "7c72f7e8a18d38c7a5264503a95dc6d5", "phone": "15227132129", "avatar": "http://wozhuaapi.newpi.net/images/avatar_1.png", "gender": 1, "identity": 1, "wechat_openid": "o4SX354GWnnvEIsA2nHWWBbK8PVw" }'// 微信用户信息
+var openid = localStorage.getItem("openid") || ""
 var userId // = wxUser ? wxUser.userid : '';
 var code = sessionStorage.getItem("code")
 var state = ""
@@ -13,6 +13,7 @@ $(function () {
   let code1 = getUrlCode("code")
   if (code1) {
     sessionStorage.setItem("code", code1)
+    code = code1
   }
   userId = wxUser ? JSON.parse(wxUser).userid : ""
   // alert("code===", code)
@@ -241,10 +242,10 @@ function weChatLogin (url, state) {
     getApi("post", "/login/login-mpcode", { code: code }).then((res) => {
       if (res.status) {
         // code 登录成功
-        sessionStorage.setItem("wxUser", JSON.stringify(res.data))
-        sessionStorage.setItem("openid", res.data.wechat_openid)
+        localStorage.setItem("wxUser", JSON.stringify(res.data))
+        localStorage.setItem("openid", res.data.wechat_openid)
       } else {
-        sessionStorage.setItem("openid", res.data.openid)
+        localStorage.setItem("openid", res.data.openid)
         window.location.href = "login.html"
       }
     })
