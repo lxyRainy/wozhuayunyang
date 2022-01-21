@@ -76,7 +76,7 @@ function yunyangClick () {
     pet_id: "",
   }
   const page = "xiaoyuanxq.html?id=" + id
-  commonAdoptClick(params, page, '1')
+  commonAdoptClick(page, params, '1')
   // if (!wxUser || !openid) {
   //   weChatLogin("xiaoyuanxq.html?id=" + id, '1')
   // } else {

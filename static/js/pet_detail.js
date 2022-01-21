@@ -262,7 +262,7 @@ function yunyangClick () {
     pet_id: pet_id,
   }
   const page = "pet_detail.html?id=" + pet_id
-  commonAdoptClick(params, page, '1')
+  commonAdoptClick(page, params, '1')
 
   // if (!wxUser || !openid) {
   //   weChatLogin("pet_detail.html?id=" + pet_id, '1', params)

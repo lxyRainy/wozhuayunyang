@@ -242,7 +242,7 @@ function openAuthorizePage (url, state) {
  * @param {*} state 回调页面里的参数。自行判断 '1'的时候直接去调支付的接口
  */
 function commonAdoptClick (page, params, state) {
-  if (!wxUser || !openid) {
+  if (!wxUser || !openid) {// 如果没有user信息或者openid就去登录，否则就生成订单去支付
     weChatLogin(page, params, state)
   } else {
     makeAdot(params, page)
@@ -256,6 +256,8 @@ function weChatLogin (page, params, state) {
         // code 登录成功
         localStorage.setItem("wxUser", JSON.stringify(res.data))
         localStorage.setItem("openid", res.data.wechat_openid)
+        openid = res.data.wechat_openid
+        params.user_id = res.data.userId
         makeAdot(params, page)
       } else {
         localStorage.setItem("openid", res.data.openid)
@@ -263,6 +265,7 @@ function weChatLogin (page, params, state) {
       }
     })
   } else {
+    // 获取code
     openAuthorizePage(page, state)
   }
 }
