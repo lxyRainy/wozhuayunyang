@@ -10,7 +10,8 @@ $(function () {
   getHomeCx()
   // inputkeyup事件
   xyncChange()
-  // openAuthorizePage("xiaoyuanxq.html?id=46", "1")
+  // 分享功能
+  shareHome()
 })
 
 function getHomeCx() {
@@ -130,4 +131,20 @@ function chaClick() {
 function openXyxq(id) {
   id = 46
   window.location.href = "xiaoyuanxq.html?id=" + id
+}
+function shareHome() {
+  let radomNum = Math.ceil(Math.random() * 6)
+  let urlPath = `../images/pet_detail/tx_${radomNum}.png`
+  let param = {
+    title: "握爪云养", // 分享标题
+    desc: "宠物是那个永远不用长大的自己 #云养宠物就上握爪'", // 分享描述
+    link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+    imgUrl: urlPath, // 分享图标
+    success: function () {
+      // 设置成功
+      // 设置成功
+      console.log("分享设置成功")
+    },
+  }
+  initWxConfig(param)
 }

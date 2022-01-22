@@ -23,11 +23,10 @@ $(function () {
   console.log("userId==", userId)
   console.log("code==", code)
   hideHeader()
-  // initShare()
 })
 
 //转码
-function getUrlCode (key) {
+function getUrlCode(key) {
   let url = window.location.href
   console.log("当前url===", url)
   //如果有就直接截取code
@@ -41,7 +40,7 @@ function getUrlCode (key) {
   return ""
 }
 
-function urlToObj (str) {
+function urlToObj(str) {
   var obj = {}
   var arr1 = str.split("?")
   var arr2 = arr1[1].split("&")
@@ -53,7 +52,7 @@ function urlToObj (str) {
 }
 
 // 价格格式化
-function fmPrice (num) {
+function fmPrice(num) {
   return num.toFixed(2)
 }
 // 日期格式化
@@ -82,12 +81,12 @@ Date.prototype.format = function (format) {
   }
   return format
 }
-function formatNumber (n) {
+function formatNumber(n) {
   n = n.toString()
   return n[1] ? n : "0" + n
 }
 // 将时间戳（秒）转换为时间
-function formatTime (time) {
+function formatTime(time) {
   let date = new Date(time * 1000)
   var year = date.getFullYear()
   var month = date.getMonth() + 1
@@ -113,7 +112,7 @@ function formatTime (time) {
  * @param {*} data 传参
  * @returns
  */
-function getApi (method, url, data) {
+function getApi(method, url, data) {
   console.log("入参data===", data)
   return new Promise(function (resolve, reject) {
     let timestamp = new Date().getTime().toString().substr(0, 10)
@@ -157,7 +156,7 @@ function getApi (method, url, data) {
   })
 }
 // 获取路径中的参数
-function getUrlParam (name) {
+function getUrlParam(name) {
   var result = window.location.search.match(
     new RegExp("[?&]" + name + "=([^&]+)", "i")
   )
@@ -167,7 +166,7 @@ function getUrlParam (name) {
   return result[1]
 }
 // 将所有空格替换为换行符
-function toBr (string) {
+function toBr(string) {
   //替换所有的换行符
   string = string.replace(/\r\n/g, "<br>")
   string = string.replace(/\n/g, "<br>")
@@ -177,7 +176,7 @@ function toBr (string) {
   return string
 }
 // 根据是否是微信浏览器判断header隐藏
-function hideHeader () {
+function hideHeader() {
   if (is_weixn()) {
     $(".arrow_header").hide()
     $(".hide_header").css("padding-top", 0)
@@ -187,7 +186,7 @@ function hideHeader () {
   }
 }
 // 判断是否是微信浏览器
-function is_weixn () {
+function is_weixn() {
   var ua = navigator.userAgent.toLowerCase()
   if (ua.match(/MicroMessenger/i) == "micromessenger") {
     console.log("微信浏览器")
@@ -203,7 +202,7 @@ function is_weixn () {
  * @param fn 事件触发的回调函数
  * @param delay 延迟时间
  */
-function debounce (fn, delay = 500) {
+function debounce(fn, delay = 500) {
   let timer = null
 
   return function () {
@@ -224,7 +223,7 @@ function debounce (fn, delay = 500) {
  * @param {*} url 回调页面的路径
  * @param {*} state 携带的参数。自己规定 传 '1' 则立即执行支付的方法
  */
-function openAuthorizePage (url, state) {
+function openAuthorizePage(url, state) {
   console.log("进入验证页", url, state)
   let response_type = "code"
   state = state || "STATE"
@@ -241,36 +240,43 @@ function openAuthorizePage (url, state) {
  * @param {*} params 调支付接口需传参
  * @param {*} state 回调页面里的参数。自行判断 '1'的时候直接去调支付的接口
  */
-function commonAdoptClick (page, params, state) {
-  if (!wxUser || !openid) {// 如果没有user信息或者openid就去登录，否则就生成订单去支付
+function commonAdoptClick(page, params, state) {
+  if (!wxUser || !openid) {
+    // 如果没有user信息或者openid就去登录，否则就生成订单去支付
     weChatLogin(page, params, state)
   } else {
     makeAdot(params, page)
   }
 }
 // 微信公众号登录
-function weChatLogin (page, params, state) {
+function weChatLogin(page, params, state) {
   if (code) {
-    getApi("post", "/login/login-mpcode", { code: code }).then((res) => {
-      if (res.status) {
-        // code 登录成功
-        localStorage.setItem("wxUser", JSON.stringify(res.data))
-        localStorage.setItem("openid", res.data.wechat_openid)
-        openid = res.data.wechat_openid
-        params.user_id = res.data.userId
-        makeAdot(params, page)
-      } else {
-        localStorage.setItem("openid", res.data.openid)
-        window.location.href = "login.html"
-      }
-    })
+    if (openid && !wxUser) {
+      // 拿到openid了去登录页注册
+      window.location.href = "login.html"
+    } else {
+      getApi("post", "/login/login-mpcode", { code: code }).then((res) => {
+        if (res.status) {
+          // 之前注册过，拿code登录成功
+          localStorage.setItem("wxUser", JSON.stringify(res.data))
+          localStorage.setItem("openid", res.data.wechat_openid)
+          openid = res.data.wechat_openid
+          params.user_id = res.data.userId
+          makeAdot(params, page)
+        } else {
+          // 之前没注册过，生成的openid 去登录页
+          localStorage.setItem("openid", res.data.openid)
+          window.location.href = "login.html"
+        }
+      })
+    }
   } else {
     // 获取code
     openAuthorizePage(page, state)
   }
 }
 // 生成云养订单
-function makeAdot (params, page) {
+function makeAdot(params, page) {
   getApi("post", "/ca-pet/adopt", params).then((res) => {
     console.log("res", res)
     if (res.status && res.data) {
@@ -283,7 +289,7 @@ function makeAdot (params, page) {
   })
 }
 // 订单支付
-function payPet (order_no, url) {
+function payPet(order_no, url) {
   // getApi("post", "/login/get-mp-openid", { code: code }).then((res) => {
   // if (res.status) {
   // openid = res.data.openid
@@ -322,7 +328,7 @@ function payPet (order_no, url) {
   // })
 }
 
-function onBridgeReady (data, order_no) {
+function onBridgeReady(data, order_no) {
   WeixinJSBridge.invoke(
     "getBrandWCPayRequest",
     {
@@ -346,7 +352,7 @@ function onBridgeReady (data, order_no) {
             //点击确认后的回调函数
             window.location.href = "jump_mp.html"
           },
-          onCancel: function () { },
+          onCancel: function () {},
         })
       } else {
         $.alert("支付失败")
@@ -356,7 +362,7 @@ function onBridgeReady (data, order_no) {
 }
 
 // 查看订单支付结果
-function getPeyResult (order_no) {
+function getPeyResult(order_no) {
   let param = {
     user_id: userId,
     order_no,
@@ -373,24 +379,64 @@ function getPeyResult (order_no) {
         //点击确认后的回调函数
         window.location.href = "jump_mp.html"
       },
-      onCancel: function () { },
+      onCancel: function () {},
     })
   })
 }
-function initShare () {
-  console.log('进入分享功能')
+function initWxConfig(param) {
   if (is_weixn()) {
-    wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
-      wx.updateAppMessageShareData({
-        title: '握爪云养', // 分享标题
-        desc: '这是描述', // 分享描述
-        link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-        imgUrl: '', // 分享图标
-        success: function () {
-          // 设置成功
-        }
-      })
-    });
+    console.log("微信初始化")
+    var link = window.location.href.split("#")[0]
+    getApi("post", "/login/get-jssdk", { url: link }).then((res) => {
+      if (res.status) {
+        console.log("微信初始化接口结果：", res)
+        var datad = JSON.parse(res.data) //转译为Json字符串
+        wx.config({
+          debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来
+          appId: datad.appid, // 必填，公众号的唯一标识
+          timestamp: datad.timestamp, // 必填，生成签名的时间戳
+          nonceStr: datad.noncestr, // 必填，生成签名的随机串
+          signature: datad.signature, // 必填，签名，见附录1
+          jsApiList: [
+            "updateAppMessageShareData",
+            "updateTimelineShareData",
+            "chooseImage",
+          ], // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        })
+        wx.error(function (res) {
+          $.alert(res.msg)
+        })
+        // initShare(param)
+        wx.ready(function () {
+          console.info("ready")
+          // let paramOrz = {
+          //   title: "小院名字", // 分享标题
+          //   desc: "欢迎云养我家小院的毛孩子，非常感谢你的爱心和付出！", // 分享描述
+          //   link: "", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+          //   imgUrl: "当前小院头像", // 分享图标
+          // }
+          //需在用户可能点击分享按钮前就先调用
+          wx.updateAppMessageShareData(param)
+          //需在用户可能点击分享按钮前就先调用
+          wx.updateTimelineShareData(param)
+        })
+      }
+    })
   }
-
+}
+function initShare(param) {
+  console.log("进入分享功能")
+  wx.ready(function () {
+    console.info("ready")
+    // let paramOrz = {
+    //   title: "小院名字", // 分享标题
+    //   desc: "欢迎云养我家小院的毛孩子，非常感谢你的爱心和付出！", // 分享描述
+    //   link: "", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+    //   imgUrl: "当前小院头像", // 分享图标
+    // }
+    //需在用户可能点击分享按钮前就先调用
+    wx.updateAppMessageShareData(param)
+    //需在用户可能点击分享按钮前就先调用
+    wx.updateTimelineShareData(param)
+  })
 }

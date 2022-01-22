@@ -3,31 +3,24 @@ $(function () {
   id = getUrlParam("id")
   console.log("id==", id)
   getOrgInfo(id)
-  wechatInit()
-  let sfpay = sessionStorage.getItem('sfpay')
-  state = getUrlCode('state')
-  if (state == '1' && sfpay == '1') {// 直接调云养的接口
-    sessionStorage.remove('sfpay')// 此页面调用过一次支付以后就不要直接再调了
+  let sfpay = sessionStorage.getItem("sfpay")
+  state = getUrlCode("state")
+  if (state == "1" && sfpay == "1") {
+    // 直接调云养的接口
+    sessionStorage.remove("sfpay") // 此页面调用过一次支付以后就不要直接再调了
     yunyangClick()
   }
 })
-function wechatInit () {
-  // wx.config({
-  //   debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-  //   appId: '', // 必填，公众号的唯一标识
-  //   timestamp: , // 必填，生成签名的时间戳
-  //   nonceStr: '', // 必填，生成签名的随机串
-  //   signature: '',// 必填，签名
-  //   jsApiList: [] // 必填，需要使用的JS接口列表
-  // });
-}
+
 // 获取机构信息
-function getOrgInfo (id) {
+function getOrgInfo(id) {
   let param = {
     org_id: id,
   }
   getApi("post", "/ca-caring-organization/get", param).then((res) => {
     let data = res.data
+    sessionStorage.setItem("orgData", JSON.stringify(res.data))
+    shareOrg(data)
     initOrgPage(data)
 
     console.log(res)
@@ -37,7 +30,7 @@ function getOrgInfo (id) {
   })
 }
 // 返显页面
-function initOrgPage (data) {
+function initOrgPage(data) {
   // 顶部图
   $("#topImg").attr("src", data.top_image)
   // 小院名称
@@ -66,7 +59,7 @@ function initOrgPage (data) {
   $("#orgDetail").show()
 }
 // 云养点击事件
-function yunyangClick () {
+function yunyangClick() {
   console.log("云养点击事件wxUser", wxUser)
   let params = {
     org_id: id,
@@ -76,29 +69,18 @@ function yunyangClick () {
     pet_id: "",
   }
   const page = "xiaoyuanxq.html?id=" + id
-  commonAdoptClick(page, params, '1')
-  // if (!wxUser || !openid) {
-  //   weChatLogin("xiaoyuanxq.html?id=" + id, '1')
-  // } else {
-  //   // $.alert("此功能暂未开放")
-  //   //这个接口，在小院详情点云养一只时候，传type=1,传orgid，另外两个可以不传
-  //   // 点指定云养的时候，type=5，petid,num=5
-  //   let params = {
-  //     org_id: id,
-  //     type: 1,
-  //     user_id: userId,
-  //     num: "",
-  //     pet_id: "",
-  //   }
-  //   getApi("post", "/ca-pet/adopt", params).then((res) => {
-  //     console.log("res", res)
-  //     if (res.status && res.data) {
-  //       let data = res.data
-  //       console.log("开始支付")
-  //       payPet(data.order_no, "xiaoyuanxq.html?id=" + id)
-  //     } else {
-  //       $.alert(res.msg || "操作失败")
-  //     }
-  //   })
-  // }
+  commonAdoptClick(page, params, "1")
+}
+function shareOrg(data) {
+  let param = {
+    title: data.org_name, // 分享标题
+    desc: "欢迎云养我家小院的毛孩子，非常感谢你的爱心和付出！", // 分享描述
+    link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+    imgUrl: data.box_image, // 分享图标
+    success: function () {
+      // 设置成功
+      console.log("分享设置成功")
+    },
+  }
+  initWxConfig(param)
 }

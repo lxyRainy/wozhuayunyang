@@ -1,7 +1,13 @@
+var orgData = sessionStorage.getItem("orgData")
 $(function () {
   let id = getUrlParam("id")
   console.log("id==", id)
   getPets(id)
+  // 分享小院的信息
+  if (orgData) {
+    orgData = JSON.parse(orgData)
+    shareOrg(orgData)
+  }
 })
 function getPets(id) {
   let param = {
