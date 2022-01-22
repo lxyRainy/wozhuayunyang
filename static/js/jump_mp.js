@@ -15,7 +15,7 @@ function initPage() {
         console.log("微信初始化接口结果：", res)
         let datad = res.data //转译为Json字符串
         wx.config({
-          debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来
+          debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来
           appId: datad.appId, // 必填，公众号的唯一标识
           timestamp: datad.timestamp, // 必填，生成签名的时间戳
           nonceStr: datad.nonceStr, // 必填，生成签名的随机串

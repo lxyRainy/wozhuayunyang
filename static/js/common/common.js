@@ -398,7 +398,7 @@ function initWxConfig(param) {
         console.log("微信初始化接口结果：", res)
         let datad = res.data //转译为Json字符串
         wx.config({
-          debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来
+          debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来
           appId: datad.appId, // 必填，公众号的唯一标识
           timestamp: datad.timestamp, // 必填，生成签名的时间戳
           nonceStr: datad.nonceStr, // 必填，生成签名的随机串
@@ -425,12 +425,7 @@ function initShare(param) {
   console.log("进入分享功能")
   wx.ready(function () {
     console.info("ready")
-    // let paramOrz = {
-    //   title: "小院名字", // 分享标题
-    //   desc: "欢迎云养我家小院的毛孩子，非常感谢你的爱心和付出！", // 分享描述
-    //   link: "", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-    //   imgUrl: "当前小院头像", // 分享图标
-    // }
+
     //需在用户可能点击分享按钮前就先调用
     wx.updateAppMessageShareData(param)
     //需在用户可能点击分享按钮前就先调用
