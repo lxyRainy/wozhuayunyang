@@ -1,5 +1,5 @@
 var org_id, pet_id
-var orgData = sessionStorage.getItem("orgData")
+// var orgData = sessionStorage.getItem("orgData")
 $(function () {
   pet_id = getUrlParam("id")
   console.log("id==", pet_id)
@@ -13,10 +13,10 @@ $(function () {
     yunyangClick()
   }
   // 分享小院的信息
-  if (orgData) {
-    orgData = JSON.parse(orgData)
-    shareOrg(orgData)
-  }
+  // if (orgData) {
+  //   orgData = JSON.parse(orgData)
+  //   shareOrg(orgData)
+  // }
 })
 function getPetDetail() {
   let param = {

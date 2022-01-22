@@ -1,4 +1,5 @@
 var router = "https://adopt.wozhua.net"
+var onlineUrl = "http://yunyangh5.wozhua.net/" // 上线以后的访问地址
 var key = "8da71946065811ec8e456c92bf623eda" //调接口用的
 // sessionStorage.removeItem('sfLogin')
 var sfLogin // = sessionStorage.getItem("sfLogin") || false // 是否登录
@@ -7,6 +8,7 @@ var wxUser = localStorage.getItem("wxUser") //|| '{ "userid": 32227, "nickname":
 var openid = localStorage.getItem("openid") || ""
 var userId // = wxUser ? wxUser.userid : '';
 var code = sessionStorage.getItem("code")
+var orgData = sessionStorage.getItem("orgData")
 var state = ""
 
 $(function () {
@@ -386,35 +388,30 @@ function getPeyResult(order_no) {
 function initWxConfig(param) {
   if (is_weixn()) {
     console.log("微信初始化")
-    var link = window.location.href.split("#")[0]
-    getApi("post", "/login/get-jssdk", { url: link }).then((res) => {
+    // var link = window.location.href.split("#")[0]
+    var myurl = location.href.split("#")[0]
+    // myurl = encodeURIComponent(myurl)
+    // var url = ` 获取配置的后台接口?url=${myurl}`
+    // myurl = "http://yunyangh5.wozhua.net"
+    getApi("post", "/login/get-jssdk", { url: myurl }).then((res) => {
       if (res.status) {
         console.log("微信初始化接口结果：", res)
-        var datad = JSON.parse(res.data) //转译为Json字符串
+        let datad = res.data //转译为Json字符串
         wx.config({
           debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来
-          appId: datad.appid, // 必填，公众号的唯一标识
+          appId: datad.appId, // 必填，公众号的唯一标识
           timestamp: datad.timestamp, // 必填，生成签名的时间戳
-          nonceStr: datad.noncestr, // 必填，生成签名的随机串
+          nonceStr: datad.nonceStr, // 必填，生成签名的随机串
           signature: datad.signature, // 必填，签名，见附录1
-          jsApiList: [
-            "updateAppMessageShareData",
-            "updateTimelineShareData",
-            "chooseImage",
-          ], // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+          jsApiList: ["updateAppMessageShareData", "updateTimelineShareData"], // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         })
         wx.error(function (res) {
-          $.alert(res.msg)
+          $.alert(res.msg || "微信config失败")
         })
         // initShare(param)
         wx.ready(function () {
           console.info("ready")
-          // let paramOrz = {
-          //   title: "小院名字", // 分享标题
-          //   desc: "欢迎云养我家小院的毛孩子，非常感谢你的爱心和付出！", // 分享描述
-          //   link: "", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-          //   imgUrl: "当前小院头像", // 分享图标
-          // }
+
           //需在用户可能点击分享按钮前就先调用
           wx.updateAppMessageShareData(param)
           //需在用户可能点击分享按钮前就先调用
