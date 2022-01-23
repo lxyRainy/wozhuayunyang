@@ -85,6 +85,13 @@ footer>img{
     width: 61%;
 }
 .footer_dowload{
-    font-size: 4vw;
-    padding:2vw;
+    font-size: 3.5vw;
+    padding: 0 2vw;
+    background-color: var(--light-green-color);
+    color: #fff;
+    width: 19%;
+    text-align: center;
+    border-radius: 20px;
+    height: 7vw;
+    line-height: 7vw;
 }
