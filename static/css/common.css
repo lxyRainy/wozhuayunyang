@@ -9,7 +9,7 @@
     padding: 0;
     /*outline: solid 1px #666666;*/
 }
-div,input{box-sizing: border-box}
+div,input,footer{box-sizing: border-box}
 body {
     background-color: var(--gray-color);
     font-family: SimHei,"微软雅黑",sans-serif;

@@ -39,6 +39,7 @@
     flex-wrap: wrap;
     padding: 0 2vw;
     margin-top: 12vw;
+    margin-bottom: 15vw;
 }
 .content_item{
     width: 47vw;
@@ -63,4 +64,27 @@
 }
 .weui-toast{
   margin-left: 0;
+}
+footer{
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 10;
+    height: 15vw;
+    background: var(--gray-color);
+    padding: 2vw 3vw;
+    align-items: center;
+}
+footer>img{
+    width: 10vw;
+    height: 10vw;
+}
+.footer_info{
+    width: 61%;
+}
+.footer_dowload{
+    font-size: 4vw;
+    padding:2vw;
 }

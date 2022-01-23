@@ -1,12 +1,10 @@
 $(function () {
-  initPage()
+  // initPage()
 })
 function initPage() {
   if (is_weixn()) {
     console.log("微信初始化")
-    // var link = window.location.href.split("#")[0]
     var myurl = location.href.split("#")[0]
-    // myurl = encodeURIComponent(myurl)
     myurl = "http://yunyangh5.wozhua.net/jump_mp.html"
 
     // var url = ` 获取配置的后台接口?url=${myurl}`

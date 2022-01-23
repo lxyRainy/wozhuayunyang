@@ -223,7 +223,7 @@ function debounce(fn, delay = 500) {
 /**
  * 打开验证页
  * @param {*} url 回调页面的路径
- * @param {*} state 携带的参数。自己规定 传 '1' 则立即执行支付的方法
+ * @param {*} state 携带的参数。自己规定的 传 '1' 则立即执行支付的方法
  */
 function openAuthorizePage(url, state) {
   console.log("进入验证页", url, state)
@@ -233,7 +233,6 @@ function openAuthorizePage(url, state) {
   var router = encodeURIComponent("http://yunyangh5.wozhua.net/" + url)
   const jumpPath = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${router}&response_type=${response_type}&scope=${scope}&state=${state}#wechat_redirect`
   console.log("跳转url", jumpPath)
-  // window.open(jumpPath)
   window.location.href = jumpPath
 }
 /**
@@ -421,14 +420,14 @@ function initWxConfig(param) {
     })
   }
 }
-function initShare(param) {
-  console.log("进入分享功能")
-  wx.ready(function () {
-    console.info("ready")
+// function initShare(param) {
+//   console.log("进入分享功能")
+//   wx.ready(function () {
+//     console.info("ready")
 
-    //需在用户可能点击分享按钮前就先调用
-    wx.updateAppMessageShareData(param)
-    //需在用户可能点击分享按钮前就先调用
-    wx.updateTimelineShareData(param)
-  })
-}
+//     //需在用户可能点击分享按钮前就先调用
+//     wx.updateAppMessageShareData(param)
+//     //需在用户可能点击分享按钮前就先调用
+//     wx.updateTimelineShareData(param)
+//   })
+// }
