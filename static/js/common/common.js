@@ -345,15 +345,25 @@ function onBridgeReady(data, order_no) {
         // 使用以上方式判断前端返回,微信团队郑重提示：
         //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
         // setTimeout(getPeyResult(order_no), 3000)
-        $.confirm({
+        $.modal({
           title: "提示",
           text: "恭喜您云养成功，您可以去小程序-“我的云养”查看云养的宠物",
-          onOK: function () {
-            //点击确认
-            //点击确认后的回调函数
-            window.location.href = "jump_mp.html"
-          },
-          onCancel: function () {},
+          buttons: [
+            {
+              text: "再养一只",
+              className: "default",
+              onClick: function () {
+                console.log(3)
+              },
+            },
+            {
+              text: "去查看",
+              onClick: function () {
+                console.log(2)
+                window.location.href = "jump_mp.html"
+              },
+            },
+          ],
         })
       } else {
         $.alert("支付失败")
@@ -381,6 +391,26 @@ function getPeyResult(order_no) {
         window.location.href = "jump_mp.html"
       },
       onCancel: function () {},
+    })
+    $.modal({
+      title: "提示",
+      text: "恭喜您云养成功，您可以去小程序-“我的云养”查看云养的宠物",
+      buttons: [
+        {
+          text: "再养一只",
+          className: "default",
+          onClick: function () {
+            console.log(3)
+            window.location.href = "jump_mp.html"
+          },
+        },
+        {
+          text: "去查看",
+          onClick: function () {
+            console.log(2)
+          },
+        },
+      ],
     })
   })
 }
