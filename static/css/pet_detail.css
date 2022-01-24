@@ -22,6 +22,7 @@
 .pet_video{
   width: 100%;
   min-height: 50vw;
+  background: black;
 }
 .video_start{
     width: 30px;

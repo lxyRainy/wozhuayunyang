@@ -58,12 +58,12 @@ async function showVideos (files) {
   const len = files.length
   if (files && len) {
     let item = files[0]
-
+    // poster="static/images/pet_detail/black.jpg"
     // x5-video-player-type="h5"
     html = `
     <div class="video_item">
       <div style="line-height:8vw;">拍摄于${formatTime(item.add_time)}</div>
-      <video  class="pet_video"  webkit-playsinline="true" controls="controls" id="myVideo"  style="object-fit:cover"  poster="static/images/pet_detail/black.jpg" >
+      <video  class="pet_video"  webkit-playsinline="true" controls="controls" id="myVideo"  custom-cache="false"  style="object-fit:cover"  preload="auto"  >
       <source src="${item.file_url}">
       </video>
     </div>      
