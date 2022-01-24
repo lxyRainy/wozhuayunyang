@@ -12,13 +12,12 @@ $(function () {
     sessionStorage.remove("sfpay") // 是否现在支付
     yunyangClick()
   }
-  // 分享小院的信息
-  // if (orgData) {
-  //   orgData = JSON.parse(orgData)
-  //   shareOrg(orgData)
-  // }
+
 })
 function getPetDetail () {
+  $('#backOrg').click(function () {
+    window.location.href = 'xiaoyuanxq.html?id=' + org_id
+  })
   let param = {
     pet_id: pet_id,
   }
@@ -37,6 +36,10 @@ function getPetDetail () {
 function showPetPge (data) {
   // 顶部图
   $("#topImg").attr("src", data.avatar)
+  $("#big_img").attr("src", data.avatar)
+  $("#topImg").click(function () {
+    $("#about").popup();
+  })
   $("#petNo").html("编号：" + data.pet_no)
   $(".pet_name").html(data.org_nickname)
 
@@ -77,19 +80,19 @@ async function showVideos (files) {
     $("#pet_movies").html(html)
 
     // 这里通过http-server将视频地址与js进行同源
-    const videoSrc = item.file_url
+    // const videoSrc = item.file_url
     // 饱和度品质 0/10/30/50
-    const targetSaturation = 0
-    getBestPoster(videoSrc, targetSaturation)
-      .then((posterUrl) => {
-        // const image = new Image()
-        // image.src = posterUrl
-        // document.body.append(image)
-        $("#myVideo").attr("poster", posterUrl)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    // const targetSaturation = 0
+    // getBestPoster(videoSrc, targetSaturation)
+    //   .then((posterUrl) => {
+    //     // const image = new Image()
+    //     // image.src = posterUrl
+    //     // document.body.append(image)
+    //     $("#myVideo").attr("poster", posterUrl)
+    //   })
+    //   .catch((error) => {
+    //     console.log(error)
+    //   })
   } else {
     html = "<div class='no_data'>暂无数据</div>"
     $("#pet_movies").html(html)
@@ -275,7 +278,7 @@ function yunyangClick () {
 function shareOrg (data) {
   let param = {
     title: '握爪云养', // 分享标题
-    desc: "指定云养，5周起养，专宠你所喜欢的宠物", // 分享描述
+    desc: "指定云养，5周起养，专宠你所喜欢的宠物。", // 分享描述
     link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
     imgUrl: data.avatar, // 分享图标
     success: function () {
@@ -283,5 +286,6 @@ function shareOrg (data) {
       console.log("分享设置成功")
     },
   }
+  console.log('详情页分享，入参', param)
   initWxConfig(param)
 }

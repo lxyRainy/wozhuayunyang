@@ -49,3 +49,17 @@
 .org_phone:before{
   content:url(../images/pet_detail/phone.svg) !important
 }
+.back_home{
+  background: #fff;
+  border-radius: 50%;
+  width: 9vw;
+  height: 9vw;
+  text-align: center;
+  top:15vw;
+  z-index: 1;
+}
+.close_img{
+  position: absolute;
+  top: 18vw;
+  right: 2vw;
+}

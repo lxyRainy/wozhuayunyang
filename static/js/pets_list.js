@@ -2,13 +2,8 @@ $(function () {
   let id = getUrlParam("id")
   console.log("id==", id)
   getPets(id)
-  // 分享小院的信息
-  // if (orgData) {
-  //   orgData = JSON.parse(orgData)
-  //   shareOrg(orgData)
-  // }
 })
-function getPets(id) {
+function getPets (id) {
   let param = {
     org_id: id,
     // status: 1,
@@ -17,6 +12,7 @@ function getPets(id) {
   getApi("post", "/ca-pet/list", param).then((res) => {
     if (res.status && res.data && res.data.length) {
       let data = res.data
+      sharePets(data[0].avatar) // 自定义分享
 
       data.map((item) => {
         // 状态 0全部 1未认养 2认养中
@@ -59,6 +55,21 @@ function getPets(id) {
     $("#petsList").html(html)
   })
 }
-function openPetDetail(id) {
+function openPetDetail (id) {
   window.location.href = "pet_detail.html?id=" + id
 }
+function sharePets (avatar) {
+  let param = {
+    title: '我家小院的毛孩子', // 分享标题
+    desc: "小可爱们等待你的助养，感谢你的爱心和付出！", // 分享描述
+    link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+    imgUrl: avatar, // 分享图标
+    success: function () {
+      // 设置成功
+      console.log("分享设置成功")
+    },
+  }
+  console.log('详情页分享，入参', param)
+  initWxConfig(param)
+}
+
