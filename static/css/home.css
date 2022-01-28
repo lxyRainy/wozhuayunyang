@@ -26,12 +26,11 @@
 }
 .home_top img{
     content:url(../images/home/close_pic.svg);
-    /* display: block; */
+    display: block;
     position: absolute;
     right: 5vw;
-    top: 50%;
-    transform: translate(0,-50%);
-    display: none;
+    top: 19%;
+   display: none;
 }
 
 .home_content{

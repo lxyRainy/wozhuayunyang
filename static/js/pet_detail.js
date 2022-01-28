@@ -63,14 +63,14 @@ async function showVideos (files) {
     html = `
     <div class="video_item">
       <div style="line-height:8vw;">拍摄于${formatTime(item.add_time)}</div>
-      <video  class="pet_video"  webkit-playsinline="true" controls="controls" id="myVideo"  custom-cache="false"  style="object-fit:cover"  preload="auto"  >
+      <video  class="pet_video" poster="${item.file_url}?x-oss-process=video/snapshot,t_1,f_jpg,m_fast" webkit-playsinline="true" controls="controls" id="myVideo"  custom-cache="false"  style="object-fit:cover"  preload="auto"  >
       <source src="${item.file_url}">
       </video>
     </div>      
     `
     html += `
     <div class="video_item">
-      <div class="pet_video"  style="filter:contrast(5%) blur(5px);background:black;height:100vw"></div>
+      <div class="pet_video"  style="filter:contrast(5%) blur(5px);height:100vw"></div>
       ${len > 1
         ? `<p class="unlock_video">云养成功后解锁剩余${len - 1}个视频</p>`
         : ""
