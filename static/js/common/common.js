@@ -276,6 +276,7 @@ function weChatLogin(page, params, state) {
   } else {
     // 获取完code就去支付
     sessionStorage.setItem("sfpay", "1")
+
     // 获取code
     openAuthorizePage(page, state)
   }
