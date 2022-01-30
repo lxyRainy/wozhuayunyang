@@ -262,6 +262,7 @@ function weChatLogin(page, params, state) {
           // 之前注册过，拿code登录成功
           localStorage.setItem("wxUser", JSON.stringify(res.data))
           localStorage.setItem("openid", res.data.wechat_openid)
+          wxUser = JSON.stringify(res.data)
           openid = res.data.wechat_openid
           params.user_id = res.data.userid
           userId = res.data.userid
