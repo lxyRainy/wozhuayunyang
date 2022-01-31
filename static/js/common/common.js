@@ -379,47 +379,47 @@ function onBridgeReady(data, order_no) {
 }
 
 // 查看订单支付结果
-function getPeyResult(order_no) {
-  let param = {
-    user_id: userId,
-    order_no,
-  }
-  getApi("post", "/ca-pet/get-order", param).then((res) => {
-    // onBridgeReady()
+// function getPeyResult(order_no) {
+//   let param = {
+//     user_id: userId,
+//     order_no,
+//   }
+//   getApi("post", "/ca-pet/get-order", param).then((res) => {
+//     // onBridgeReady()
 
-    //如果参数过多，建议通过 object 方式传入
-    $.confirm({
-      title: "提示",
-      text: "恭喜您云养成功，可以下载握爪APP，查看刚云养的宠物",
-      onOK: function () {
-        //点击确认
-        //点击确认后的回调函数
-        window.location.href = "jump_mp.html"
-      },
-      onCancel: function () {},
-    })
-    $.modal({
-      title: "提示",
-      text: "恭喜您云养成功，可以下载握爪APP，查看刚云养的宠物",
-      buttons: [
-        {
-          text: "再养一只",
-          className: "default",
-          onClick: function () {
-            console.log(3)
-            window.location.href = "jump_mp.html"
-          },
-        },
-        {
-          text: "去查看",
-          onClick: function () {
-            console.log(2)
-          },
-        },
-      ],
-    })
-  })
-}
+//     //如果参数过多，建议通过 object 方式传入
+//     $.confirm({
+//       title: "提示",
+//       text: "恭喜您云养成功，可以下载握爪APP，查看刚云养的宠物",
+//       onOK: function () {
+//         //点击确认
+//         //点击确认后的回调函数
+//         window.location.href = "jump_mp.html"
+//       },
+//       onCancel: function () {},
+//     })
+//     $.modal({
+//       title: "提示",
+//       text: "恭喜您云养成功，可以下载握爪APP，查看刚云养的宠物",
+//       buttons: [
+//         {
+//           text: "再养一只",
+//           className: "default",
+//           onClick: function () {
+//             console.log(3)
+//             window.location.href = "jump_mp.html"
+//           },
+//         },
+//         {
+//           text: "去查看",
+//           onClick: function () {
+//             console.log(2)
+//           },
+//         },
+//       ],
+//     })
+//   })
+// }
 function initWxConfig(param) {
   if (is_weixn()) {
     console.log("微信初始化")
@@ -456,14 +456,3 @@ function initWxConfig(param) {
     })
   }
 }
-// function initShare(param) {
-//   console.log("进入分享功能")
-//   wx.ready(function () {
-//     console.info("ready")
-
-//     //需在用户可能点击分享按钮前就先调用
-//     wx.updateAppMessageShareData(param)
-//     //需在用户可能点击分享按钮前就先调用
-//     wx.updateTimelineShareData(param)
-//   })
-// }
