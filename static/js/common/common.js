@@ -14,6 +14,7 @@ var state = ""
 $(function () {
   let code1 = getUrlCode("code")
   if (code1) {
+    forbidBack()
     sessionStorage.setItem("code", code1)
     code = code1
   }
@@ -455,4 +456,11 @@ function initWxConfig(param) {
       }
     })
   }
+}
+//禁止页面后退
+function forbidBack() {
+  history.pushState(null, null, document.URL)
+  window.addEventListener("popstate", function () {
+    history.pushState(null, null, document.URL)
+  })
 }
