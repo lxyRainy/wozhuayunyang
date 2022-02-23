@@ -14,3 +14,14 @@ poster="${
 
 - img标签需加style属性 cursor:pointer
 
+
+## 返回上一页的缓存监听
+```
+ window.addEventListener('pageshow', (e) => {
+    console.log('eee', e)
+    if (e.persisted || (window.performance &&
+      window.performance.navigation.type == 2)) {
+      location.reload()
+    }
+  }, false)
+```

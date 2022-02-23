@@ -13,7 +13,7 @@ $(function () {
 })
 
 // 获取机构信息
-function getOrgInfo(id) {
+function getOrgInfo (id) {
   let param = {
     org_id: id,
   }
@@ -30,7 +30,7 @@ function getOrgInfo(id) {
   })
 }
 // 返显页面
-function initOrgPage(data) {
+function initOrgPage (data) {
   // 顶部图
   $("#topImg").attr("src", data.top_image)
   // 小院名称
@@ -59,7 +59,7 @@ function initOrgPage(data) {
   $("#orgDetail").show()
 }
 // 云养点击事件
-function yunyangClick() {
+function yunyangClick () {
   console.log("云养点击事件wxUser", wxUser)
   let params = {
     org_id: id,
@@ -71,7 +71,7 @@ function yunyangClick() {
   const page = "xiaoyuanxq.html?id=" + id
   commonAdoptClick(page, params, "1")
 }
-function shareOrg(data) {
+function shareOrg (data) {
   let param = {
     title: data.org_name, // 分享标题
     desc: "欢迎云养我家小院的毛孩子，非常感谢你的爱心和付出！", // 分享描述
