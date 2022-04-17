@@ -249,7 +249,14 @@ function commonAdoptClick(page, params, state) {
     // 如果没有user信息或者openid就去登录，否则就生成订单去支付
     weChatLogin(page, params, state)
   } else {
-    makeAdot(params, page)
+    // todo 这里判断 这里面有没有手机号
+    let myuser = JSON.parse(wxUser)
+    if (myuser.phone) {
+      makeAdot(params, page)
+    } else {
+      localStorage.setItem("openid", openid)
+      window.location.href = "login.html"
+    }
   }
 }
 // 微信公众号登录
@@ -273,7 +280,7 @@ function weChatLogin(page, params, state) {
             makeAdot(params, page)
           } else {
             // 之前没注册过，生成的openid 去登录页
-            localStorage.setItem("openid", res.data.openid)
+            localStorage.setItem("openid", openid)
             window.location.href = "login.html"
           }
         } else {
