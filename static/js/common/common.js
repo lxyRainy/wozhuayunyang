@@ -388,6 +388,7 @@ function onBridgeReady(data, order_no) {
           ],
         })
       } else {
+        $.alert("支付失败！")
         // 取消订单
         cancelOrder(order_no)
       }
@@ -401,7 +402,7 @@ function cancelOrder(order_no){
     order_no
   }
   getApi("post", "/ca-pet/cancel-order", param).then((res) => {
-    $.alert("取消支付，订单已取消！")
+   console.log('订单已取消')
   })
 }
 // 查看订单支付结果
