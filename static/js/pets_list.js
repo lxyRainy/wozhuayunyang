@@ -34,13 +34,19 @@ function getPets (id) {
           cloudUser = `<div class="pet_user"><img src="${avatar}" >${user.nickname} 云养</div>`
           // }
         }
+          let petnickname = ""
+          if(item.user_nickname) {
+              petnickname = item.user_nickname
+          } else {
+              petnickname = item.org_nickname
+          }
         // <img src="${item.avatar}" alt="宠物">
         html += `<div class="pets_list" ${clickStr}>
               <p style="background-image:url(${item.avatar})" class="pets_img"></p>
               <div class="pets_info">
                 ${cloudUser}
                   <p class="pet_name">
-                  <span>${item.org_nickname}</span>
+                  <span>${petnickname}</span>
                   ${str}
                   </p>
                   <div class="pet_no">编号：${item.pet_no}</div>

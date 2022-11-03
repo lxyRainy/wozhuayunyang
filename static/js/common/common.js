@@ -388,12 +388,22 @@ function onBridgeReady(data, order_no) {
           ],
         })
       } else {
-        $.alert("支付失败")
+        // 取消订单
+        cancelOrder(order_no)
       }
     }
   )
 }
-
+ // 取消订单
+function cancelOrder(order_no){
+  const param ={
+    user_id:userId,
+    order_no
+  }
+  getApi("post", "/ca-pet/cancel-order", param).then((res) => {
+    $.alert("取消支付，订单已取消！")
+  })
+}
 // 查看订单支付结果
 // function getPeyResult(order_no) {
 //   let param = {

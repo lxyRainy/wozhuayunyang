@@ -40,8 +40,11 @@ function showPetPge(data) {
     $("#about").popup()
   })
   $("#petNo").html("编号：" + data.pet_no)
-  $(".pet_name").html(data.org_nickname)
-
+    if(data.user_nickname) {
+        $(".pet_name").html(data.user_nickname)
+    } else {
+        $(".pet_name").html(data.org_nickname)
+    }
   $(".arrow_header").append(data.org_nickname)
   $("#pet_intro").html(data.intro)
   const org = data.org_info
